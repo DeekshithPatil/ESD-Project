@@ -1,34 +1,12 @@
-/* --COPYRIGHT--,BSD
- * Copyright (c) 2016, Texas Instruments Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * --/COPYRIGHT--*/
+/*
+ * main.c
+ * Brief - Application entry point
+ * Reference - TI Examples
+ * Authors -
+ *           a. Santhosh, santhosh@colorado.edu
+ *           b. Jahnavi Pinnamaneni, jahnavi.pinnamaneni@colorado.edu
+ *           c. Deekshith Reddy Patil, patil.deekshithreddy@colorado.edu
+ */
 /* DriverLib Includes */
 #include "driverlib.h"
 
@@ -47,7 +25,8 @@
 
 //Touch screen context
 touch_context g_sTouchContext;
-Graphics_ImageButton primitiveButton;
+//Graphics_ImageButton primitiveButton;
+Graphics_ImageButton playButton;
 Graphics_ImageButton imageButton;
 Graphics_Button yesButton;
 Graphics_Button noButton;
@@ -98,20 +77,14 @@ void main(void)
 
         if(g_sTouchContext.touch)
         {
-            if(Graphics_isImageButtonSelected(&primitiveButton,
+            if(Graphics_isImageButtonSelected(&playButton,
                                               g_sTouchContext.x,
                                               g_sTouchContext.y))
             {
-                Graphics_drawSelectedImageButton(&g_sContext,&primitiveButton);
+                Graphics_drawSelectedImageButton(&g_sContext,&playButton);
                 runPrimitivesDemo();
             }
-            else if(Graphics_isImageButtonSelected(&imageButton,
-                                                   g_sTouchContext.x,
-                                                   g_sTouchContext.y))
-            {
-                Graphics_drawSelectedImageButton(&g_sContext,&imageButton);
-                runImagesDemo();
-            }
+
 
             if(g_ranDemo == true)
             {
@@ -125,26 +98,26 @@ void main(void)
 void initializeDemoButtons(void)
 {
     // Initiliaze primitives Demo Button
-    primitiveButton.xPosition = 20;
-    primitiveButton.yPosition = 50;
-    primitiveButton.borderWidth = 5;
-    primitiveButton.selected = false;
-    primitiveButton.imageWidth = Primitives_Button4BPP_UNCOMP.xSize;
-    primitiveButton.imageHeight = Primitives_Button4BPP_UNCOMP.ySize;
-    primitiveButton.borderColor = GRAPHICS_COLOR_WHITE;
-    primitiveButton.selectedColor = GRAPHICS_COLOR_RED;
-    primitiveButton.image = &Primitives_Button4BPP_UNCOMP;
+    playButton.xPosition = 100;
+    playButton.yPosition = 60;
+    playButton.borderWidth = 5;
+    playButton.selected = false;
+    playButton.imageWidth = Primitives_Button4BPP_UNCOMP.xSize;
+    playButton.imageHeight = Primitives_Button4BPP_UNCOMP.ySize;
+    playButton.borderColor = GRAPHICS_COLOR_WHITE;
+    playButton.selectedColor = GRAPHICS_COLOR_RED;
+    playButton.image = &Primitives_Button4BPP_UNCOMP;
 
     // Initiliaze images Demo Button
-    imageButton.xPosition = 180;
-    imageButton.yPosition = 50;
-    imageButton.borderWidth = 5;
-    imageButton.selected = false;
-    imageButton.imageWidth = Primitives_Button4BPP_UNCOMP.xSize;
-    imageButton.imageHeight = Primitives_Button4BPP_UNCOMP.ySize;
-    imageButton.borderColor = GRAPHICS_COLOR_WHITE;
-    imageButton.selectedColor = GRAPHICS_COLOR_RED;
-    imageButton.image = &Images_Button4BPP_UNCOMP;
+//    imageButton.xPosition = 180;
+//    imageButton.yPosition = 50;
+//    imageButton.borderWidth = 5;
+//    imageButton.selected = false;
+//    imageButton.imageWidth = Primitives_Button4BPP_UNCOMP.xSize;
+//    imageButton.imageHeight = Primitives_Button4BPP_UNCOMP.ySize;
+//    imageButton.borderColor = GRAPHICS_COLOR_WHITE;
+//    imageButton.selectedColor = GRAPHICS_COLOR_RED;
+//    imageButton.image = &Images_Button4BPP_UNCOMP;
 
     yesButton.xMin = 80;
     yesButton.xMax = 150;
@@ -184,24 +157,30 @@ void drawMainMenu(void)
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
     Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
     Graphics_clearDisplay(&g_sContext);
-    Graphics_drawStringCentered(&g_sContext, "MSP Graphics Library Demo",
+    Graphics_drawStringCentered(&g_sContext, "Tic Tac Toe Gaming Console",
                                 AUTO_STRING_LENGTH,
                                 159,
                                 15,
                                 TRANSPARENT_TEXT);
 
     // Draw TI banner at the bottom of screnn
-    Graphics_drawImage(&g_sContext,
-                       &TI_platform_bar_red4BPP_UNCOMP,
-                       0,
-                       Graphics_getDisplayHeight(
-                           &g_sContext) - TI_platform_bar_red4BPP_UNCOMP.ySize);
+//    Graphics_drawImage(&g_sContext,
+//                       &TI_platform_bar_red4BPP_UNCOMP,
+//                       0,
+//                       Graphics_getDisplayHeight(
+//                           &g_sContext) - TI_platform_bar_red4BPP_UNCOMP.ySize);
 
     // Draw Primitives image button
-    Graphics_drawImageButton(&g_sContext, &primitiveButton);
+    Graphics_drawImageButton(&g_sContext, &playButton);
+
+    Graphics_drawStringCentered(&g_sContext, "Start",
+                                10, //AUTO_STRING_LENGTH
+                                160,
+                                115,
+                                TRANSPARENT_TEXT);
 
     // Draw Images image button
-    Graphics_drawImageButton(&g_sContext, &imageButton);
+    //Graphics_drawImageButton(&g_sContext, &imageButton);
 }
 
 void runPrimitivesDemo(void)
