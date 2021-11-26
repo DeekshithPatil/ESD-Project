@@ -12,7 +12,7 @@
 
 /* Standard Includes */
 #include <stdint.h>
-
+#include <stdio.h>
 /* GrLib Includes */
 #include "grlib.h"
 #include "button.h"
@@ -91,6 +91,8 @@ void main(void)
                 g_ranDemo = false;
                 drawMainMenu();
             }
+
+//            printf("\r\nTouch detected at (%d,%d)\r\n",g_sTouchContext.x,g_sTouchContext.y);
         }
     }
 }
@@ -185,130 +187,144 @@ void drawMainMenu(void)
 
 void runPrimitivesDemo(void)
 {
-    int16_t ulIdx;
-    uint32_t color;
+//    int16_t ulIdx;
+//    uint32_t color;
 
-    Graphics_Rectangle myRectangle1 = { 10, 50, 155, 120};
-    Graphics_Rectangle myRectangle2 = { 150, 100, 300, 200};
-    Graphics_Rectangle myRectangle3 = { 0, 0, 319, 239};
+//    Graphics_Rectangle myRectangle1 = { 10, 50, 155, 120};
+//    Graphics_Rectangle myRectangle2 = { 150, 100, 300, 200};
+//    Graphics_Rectangle myRectangle3 = { 0, 0, 319, 239};
 
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
     Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
     Graphics_clearDisplay(&g_sContext);
-    Graphics_drawString(&g_sContext, "Draw Pixels & Lines", AUTO_STRING_LENGTH,
-                        60, 5, TRANSPARENT_TEXT);
-    Graphics_drawPixel(&g_sContext, 45, 45);
-    Graphics_drawPixel(&g_sContext, 45, 50);
-    Graphics_drawPixel(&g_sContext, 50, 50);
-    Graphics_drawPixel(&g_sContext, 50, 45);
-    Graphics_drawLine(&g_sContext, 60, 60, 200, 200);
-    Graphics_drawLine(&g_sContext, 30, 200, 200, 60);
-    Graphics_drawLine(&g_sContext, 0, Graphics_getDisplayHeight(
-                          &g_sContext) - 1,
-                      Graphics_getDisplayWidth(&g_sContext) - 1,
-                      Graphics_getDisplayHeight(&g_sContext) - 1);
-    Delay(2000);
-    Graphics_clearDisplay(&g_sContext);
-    Graphics_drawStringCentered(&g_sContext, "Draw Rectangles",
-                                AUTO_STRING_LENGTH, 159, 15, TRANSPARENT_TEXT);
-    Graphics_drawRectangle(&g_sContext, &myRectangle1);
-    Graphics_fillRectangle(&g_sContext, &myRectangle2);
-    // Text won't be visible on screen due to transparency (foreground colors match)
-    Graphics_drawStringCentered(&g_sContext, "Normal Text", AUTO_STRING_LENGTH,
-                                225, 120, TRANSPARENT_TEXT);
-    // Text draws foreground and background for opacity
-    Graphics_drawStringCentered(&g_sContext, "Opaque Text", AUTO_STRING_LENGTH,
-                                225, 150, OPAQUE_TEXT);
-    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+//    Graphics_drawString(&g_sContext, "Draw Pixels & Lines", AUTO_STRING_LENGTH,
+//                        60, 5, TRANSPARENT_TEXT);
+//    Graphics_drawPixel(&g_sContext, 45, 45);
+//    Graphics_drawPixel(&g_sContext, 45, 50);
+//    Graphics_drawPixel(&g_sContext, 50, 50);
+//    Graphics_drawPixel(&g_sContext, 50, 45);
 
-    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_RED);
-    // Text draws with inverted foreground color to become visible
-    Graphics_drawStringCentered(&g_sContext, "Invert Text", AUTO_STRING_LENGTH,
-                                225, 180, TRANSPARENT_TEXT);
+    //Vertical Lines
+    Graphics_drawLine(&g_sContext, 120, 20, 120, 220);
+    Graphics_drawLine(&g_sContext, 200, 20, 200, 220);
+
+    //Horizontal Lines
+    Graphics_drawLine(&g_sContext, 40, 87, 280, 87);
+    Graphics_drawLine(&g_sContext, 40, 153, 280, 153);
+//    Graphics_drawLine(&g_sContext, 220, 20, 220, 220);
+
+//    Graphics_drawLine(&g_sContext, 30, 200, 200, 60);
+//    Graphics_drawLine(&g_sContext, 0, Graphics_getDisplayHeight(
+//                          &g_sContext) - 1,
+//                      Graphics_getDisplayWidth(&g_sContext) - 1,
+//                      Graphics_getDisplayHeight(&g_sContext) - 1);
     Delay(2000);
-    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
-    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
-    // Invert the foreground and background colors
-    Graphics_fillRectangle(&g_sContext, &myRectangle3);
-    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
-    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_RED);
-    Graphics_drawStringCentered(&g_sContext, "Invert Colors",
-                                AUTO_STRING_LENGTH, 159, 15, TRANSPARENT_TEXT);
-    Graphics_drawRectangle(&g_sContext, &myRectangle1);
-    Graphics_fillRectangle(&g_sContext, &myRectangle2);
-    // Text won't be visible on screen due to transparency
-    Graphics_drawStringCentered(&g_sContext, "Normal Text", AUTO_STRING_LENGTH,
-                                225, 120, TRANSPARENT_TEXT);
-    // Text draws foreground and background for opacity
-    Graphics_drawStringCentered(&g_sContext, "Opaque Text", AUTO_STRING_LENGTH,
-                                225, 150, OPAQUE_TEXT);
-    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
-    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
-    // Text draws with inverted color to become visible
-    Graphics_drawStringCentered(&g_sContext, "Invert Text", AUTO_STRING_LENGTH,
-                                225, 180, TRANSPARENT_TEXT);
-    Delay(2000);
-    Graphics_clearDisplay(&g_sContext);
-    Graphics_drawStringCentered(&g_sContext, "Draw Circles", AUTO_STRING_LENGTH,
-                                159, 15, TRANSPARENT_TEXT);
-    Graphics_drawCircle(&g_sContext, 100, 100, 50);
-    Graphics_fillCircle(&g_sContext, 200, 140, 70);
-    Delay(2000);
-    Graphics_clearDisplay(&g_sContext);
-    // Add some more color
-    Graphics_setForegroundColor(&g_sContext, ClrLawnGreen);
-    Graphics_setBackgroundColor(&g_sContext, ClrBlack);
-    Graphics_clearDisplay(&g_sContext);
-    Graphics_drawStringCentered(&g_sContext, "Rainbow of Colored Lines",
-                                AUTO_STRING_LENGTH, 159, 15, TRANSPARENT_TEXT);
-    // Draw a quarter rectangle sweep of lines from red to purple.
-    for(ulIdx = 128; ulIdx >= 1; ulIdx--)
+//    Graphics_clearDisplay(&g_sContext);
+//    Graphics_drawStringCentered(&g_sContext, "Draw Rectangles",
+//                                AUTO_STRING_LENGTH, 159, 15, TRANSPARENT_TEXT);
+//    Graphics_drawRectangle(&g_sContext, &myRectangle1);
+//    Graphics_fillRectangle(&g_sContext, &myRectangle2);
+//    // Text won't be visible on screen due to transparency (foreground colors match)
+//    Graphics_drawStringCentered(&g_sContext, "Normal Text", AUTO_STRING_LENGTH,
+//                                225, 120, TRANSPARENT_TEXT);
+//    // Text draws foreground and background for opacity
+//    Graphics_drawStringCentered(&g_sContext, "Opaque Text", AUTO_STRING_LENGTH,
+//                                225, 150, OPAQUE_TEXT);
+//    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+//
+//    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+//    // Text draws with inverted foreground color to become visible
+//    Graphics_drawStringCentered(&g_sContext, "Invert Text", AUTO_STRING_LENGTH,
+//                                225, 180, TRANSPARENT_TEXT);
+//    Delay(2000);
+//    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+//    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+//    // Invert the foreground and background colors
+//    Graphics_fillRectangle(&g_sContext, &myRectangle3);
+//    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+//    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+//    Graphics_drawStringCentered(&g_sContext, "Invert Colors",
+//                                AUTO_STRING_LENGTH, 159, 15, TRANSPARENT_TEXT);
+//    Graphics_drawRectangle(&g_sContext, &myRectangle1);
+//    Graphics_fillRectangle(&g_sContext, &myRectangle2);
+//    // Text won't be visible on screen due to transparency
+//    Graphics_drawStringCentered(&g_sContext, "Normal Text", AUTO_STRING_LENGTH,
+//                                225, 120, TRANSPARENT_TEXT);
+//    // Text draws foreground and background for opacity
+//    Graphics_drawStringCentered(&g_sContext, "Opaque Text", AUTO_STRING_LENGTH,
+//                                225, 150, OPAQUE_TEXT);
+//    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+//    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+//    // Text draws with inverted color to become visible
+//    Graphics_drawStringCentered(&g_sContext, "Invert Text", AUTO_STRING_LENGTH,
+//                                225, 180, TRANSPARENT_TEXT);
+//    Delay(2000);
+//    Graphics_clearDisplay(&g_sContext);
+//    Graphics_drawStringCentered(&g_sContext, "Draw Circles", AUTO_STRING_LENGTH,
+//                                159, 15, TRANSPARENT_TEXT);
+//    Graphics_drawCircle(&g_sContext, 100, 100, 50);
+//    Graphics_fillCircle(&g_sContext, 200, 140, 70);
+//    Delay(2000);
+//    Graphics_clearDisplay(&g_sContext);
+//    // Add some more color
+//    Graphics_setForegroundColor(&g_sContext, ClrLawnGreen);
+//    Graphics_setBackgroundColor(&g_sContext, ClrBlack);
+//    Graphics_clearDisplay(&g_sContext);
+//    Graphics_drawStringCentered(&g_sContext, "Rainbow of Colored Lines",
+//                                AUTO_STRING_LENGTH, 159, 15, TRANSPARENT_TEXT);
+//    // Draw a quarter rectangle sweep of lines from red to purple.
+//    for(ulIdx = 128; ulIdx >= 1; ulIdx--)
+//    {
+//        // Red Color
+//        *((uint16_t*) (&color) + 1) = 255;
+//        // Blue and Green Colors
+//        *((uint16_t*) (&color)) =
+//            ((((128 - ulIdx) * 255) >> 7) << ClrBlueShift);
+//
+//        Graphics_setForegroundColor(&g_sContext, color);
+//        Graphics_drawLine(&g_sContext, 160, 200, 32, ulIdx + 72);
+//    }
+//    // Draw a quarter rectangle sweep of lines from purple to blue.
+//    for(ulIdx = 128; ulIdx >= 1; ulIdx--)
+//    {
+//        // Red Color
+//        *((uint16_t*) (&color) + 1) = (ulIdx * 255) >> 7;
+//        // Blue and Green Colors
+//        *((uint16_t*) (&color)) = 255 << ClrBlueShift;
+//
+//        Graphics_setForegroundColor(&g_sContext, color);
+//        Graphics_drawLine(&g_sContext, 160, 200, 160 - ulIdx, 72);
+//    }
+//    // Clear Red Color
+//    *((uint16_t*) (&color) + 1) = 0;
+//    // Draw a quarter rectangle sweep of lines from blue to teal.
+//    for(ulIdx = 128; ulIdx >= 1; ulIdx--)
+//    {
+//        // Blue and Green Colors
+//        *((uint16_t*) (&color)) =
+//            ((((128 -
+//                ulIdx) * 255) >> 7) << ClrGreenShift) | (255 << ClrBlueShift);
+//
+//        Graphics_setForegroundColor(&g_sContext, color);
+//        Graphics_drawLine(&g_sContext, 160, 200, 288 - ulIdx, 72);
+//    }
+//    // Draw a quarter rectangle sweep of lines from teal to green.
+//    for(ulIdx = 128; ulIdx >= 0; ulIdx--)
+//    {
+//        // Blue and Green Colors
+//        *((uint16_t*) (&color)) =
+//            (255 << ClrGreenShift) | (((ulIdx * 255) >> 7) << ClrBlueShift);
+//
+//        Graphics_setForegroundColor(&g_sContext, color);
+//        Graphics_drawLine(&g_sContext, 160, 200, 288, 200 - (ulIdx));
+//    }
+//    Delay(2000);
+//    g_ranDemo = true;
+
+    while(1)
     {
-        // Red Color
-        *((uint16_t*) (&color) + 1) = 255;
-        // Blue and Green Colors
-        *((uint16_t*) (&color)) =
-            ((((128 - ulIdx) * 255) >> 7) << ClrBlueShift);
 
-        Graphics_setForegroundColor(&g_sContext, color);
-        Graphics_drawLine(&g_sContext, 160, 200, 32, ulIdx + 72);
     }
-    // Draw a quarter rectangle sweep of lines from purple to blue.
-    for(ulIdx = 128; ulIdx >= 1; ulIdx--)
-    {
-        // Red Color
-        *((uint16_t*) (&color) + 1) = (ulIdx * 255) >> 7;
-        // Blue and Green Colors
-        *((uint16_t*) (&color)) = 255 << ClrBlueShift;
-
-        Graphics_setForegroundColor(&g_sContext, color);
-        Graphics_drawLine(&g_sContext, 160, 200, 160 - ulIdx, 72);
-    }
-    // Clear Red Color
-    *((uint16_t*) (&color) + 1) = 0;
-    // Draw a quarter rectangle sweep of lines from blue to teal.
-    for(ulIdx = 128; ulIdx >= 1; ulIdx--)
-    {
-        // Blue and Green Colors
-        *((uint16_t*) (&color)) =
-            ((((128 -
-                ulIdx) * 255) >> 7) << ClrGreenShift) | (255 << ClrBlueShift);
-
-        Graphics_setForegroundColor(&g_sContext, color);
-        Graphics_drawLine(&g_sContext, 160, 200, 288 - ulIdx, 72);
-    }
-    // Draw a quarter rectangle sweep of lines from teal to green.
-    for(ulIdx = 128; ulIdx >= 0; ulIdx--)
-    {
-        // Blue and Green Colors
-        *((uint16_t*) (&color)) =
-            (255 << ClrGreenShift) | (((ulIdx * 255) >> 7) << ClrBlueShift);
-
-        Graphics_setForegroundColor(&g_sContext, color);
-        Graphics_drawLine(&g_sContext, 160, 200, 288, 200 - (ulIdx));
-    }
-    Delay(2000);
-    g_ranDemo = true;
 
     drawRestarDemo();
 }
