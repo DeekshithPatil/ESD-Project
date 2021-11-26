@@ -13,6 +13,7 @@
 /* Standard Includes */
 #include <stdint.h>
 #include <stdio.h>
+#include <stdbool.h>
 /* GrLib Includes */
 #include "grlib.h"
 #include "button.h"
@@ -42,9 +43,12 @@ void boardInit(void);
 void clockInit(void);
 void initializeDemoButtons(void);
 void drawMainMenu(void);
-void runPrimitivesDemo(void);
+void drawOutline(void);
 void runImagesDemo(void);
 void drawRestarDemo(void);
+
+void startGame();
+unsigned int getBoxNumber(uint16_t x, uint16_t y);
 
 void main(void)
 {
@@ -82,7 +86,7 @@ void main(void)
                                               g_sTouchContext.y))
             {
                 Graphics_drawSelectedImageButton(&g_sContext,&playButton);
-                runPrimitivesDemo();
+                drawOutline();
             }
 
 
@@ -185,7 +189,7 @@ void drawMainMenu(void)
     //Graphics_drawImageButton(&g_sContext, &imageButton);
 }
 
-void runPrimitivesDemo(void)
+void drawOutline(void)
 {
 //    int16_t ulIdx;
 //    uint32_t color;
@@ -211,6 +215,9 @@ void runPrimitivesDemo(void)
     //Horizontal Lines
     Graphics_drawLine(&g_sContext, 40, 87, 280, 87);
     Graphics_drawLine(&g_sContext, 40, 153, 280, 153);
+
+//    Graphics_drawStringCentered(&g_sContext, "X", AUTO_STRING_LENGTH,
+//                                    80, 54, TRANSPARENT_TEXT);
 //    Graphics_drawLine(&g_sContext, 220, 20, 220, 220);
 
 //    Graphics_drawLine(&g_sContext, 30, 200, 200, 60);
@@ -321,12 +328,165 @@ void runPrimitivesDemo(void)
 //    Delay(2000);
 //    g_ranDemo = true;
 
-    while(1)
-    {
-
-    }
+    startGame();
 
     drawRestarDemo();
+}
+
+void startGame()
+{
+    int8_t character[] = {'X','O'};
+
+    char index = 0;
+
+    unsigned int boxNumber = 0;
+
+    bool isBoxSelected[10] = {false};
+
+    while(1)
+    {
+        touch_updateCurrentTouch(&g_sTouchContext);
+
+        if(g_sTouchContext.touch)
+        {
+
+            boxNumber = getBoxNumber(g_sTouchContext.x, g_sTouchContext.y);
+
+            if(boxNumber == 1 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 80, 54, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+
+            }
+
+            else if(boxNumber == 2 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 160, 54, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 3 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 240, 54, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 4 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 80, 120, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 5 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 160, 120, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 6 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 240, 120, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 7 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 80, 187, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 8 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 160, 187, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            else if(boxNumber == 9 && (!isBoxSelected[boxNumber]))
+            {
+                Graphics_drawStringCentered(&g_sContext, &character[index], 1, 240, 187, TRANSPARENT_TEXT);
+
+                index = (index + 1) % 2;
+
+                isBoxSelected[boxNumber] = true;
+            }
+
+            printf("\r\nTouch detected at (%d,%d)\r\n",g_sTouchContext.x,g_sTouchContext.y);
+        }
+    }
+}
+
+unsigned int getBoxNumber(uint16_t x, uint16_t y)
+{
+    if((x >= 40 && x <= 120) && (y >= 20 && y <= 87))
+    {
+        return 1;
+    }
+
+    if((x > 120 && x<= 200) && (y >= 20 && y <= 87))
+    {
+        return 2;
+    }
+
+    if((x > 200 && x<= 280) && (y >= 20 && y <= 87))
+    {
+        return 3;
+    }
+
+    if((x >= 40 && x <= 120) && (y > 87 && y <= 153))
+    {
+        return 4;
+    }
+
+    if((x > 120 && x<= 200) && (y > 87 && y <= 153))
+    {
+        return 5;
+    }
+
+    if((x > 200 && x<= 280) && (y > 87 && y <= 153))
+    {
+        return 6;
+    }
+
+    if((x >= 40 && x <= 120) && (y > 153 && y <= 220))
+    {
+        return 7;
+    }
+
+    if((x > 120 && x<= 200) && (y > 153 && y <= 220))
+    {
+        return 8;
+    }
+
+    if((x > 200 && x<= 280) && (y > 153 && y <= 220))
+    {
+        return 9;
+    }
+
+    return 0;
 }
 
 void runImagesDemo(void)
