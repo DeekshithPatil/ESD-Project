@@ -1,3 +1,6 @@
+#ifndef __timer_h__
+#define __timer_h__
+
 #include <mcs51/8051.h>
 
 #include <at89c51ed2.h>
@@ -8,18 +11,14 @@
 #include <stdlib.h>
 
 #include "lcd.h"
-#include "uart.h"
-#include "ttt.h"
 
+void Init_Game(void);
 
-void main()
-{
+void startGame(void);
 
-    lcd_Init();
-    Init_Game();
-    startGame();
+int changeState(void);
 
+int gameDecision(void);
 
-    while(1);
-
-}
+void gameOver(int player);
+#endif

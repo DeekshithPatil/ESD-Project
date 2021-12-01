@@ -1,3 +1,6 @@
+#ifndef __uart_h__
+#define __uart_h__
+
 #include <mcs51/8051.h>
 
 #include <at89c51ed2.h>
@@ -7,19 +10,13 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "lcd.h"
-#include "uart.h"
-#include "ttt.h"
+int putchar (int c);
+
+int getchar (void);
+
+int putstr (char *s);
 
 
-void main()
-{
-
-    lcd_Init();
-    Init_Game();
-    startGame();
 
 
-    while(1);
-
-}
+#endif
