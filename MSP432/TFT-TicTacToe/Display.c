@@ -1,5 +1,5 @@
 /*
- * Display.h
+ * Display.c
  *
  * Brief - Consists of function that are necessary to initialise and display the GUI necessary for the Tic-Tac-Toe game
  * Authors -
@@ -88,29 +88,9 @@ void drawRestartDemo(int winner)
 }
 
 //Refer "Display.h" for function description
-void clockInit(void)
-{
-    /* 2 flash wait states, VCORE = 1, running off DC-DC, 48 MHz */
-    FlashCtl_setWaitState(FLASH_BANK0, 2);
-    FlashCtl_setWaitState(FLASH_BANK1, 2);
-    PCM_setPowerState(PCM_AM_DCDC_VCORE1);
-    CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);
-    CS_setDCOFrequency(48000000);
-    CS_initClockSignal(CS_MCLK, CS_DCOCLK_SELECT, 1);
-    CS_initClockSignal(CS_SMCLK, CS_DCOCLK_SELECT, 1);
-    CS_initClockSignal(CS_HSMCLK, CS_DCOCLK_SELECT, 1);
-
-    return;
-}
 
 //Refer "Display.h" for function description
-void boardInit()
-{
-    FPU_enableModule();
-}
-
-//Refer "Display.h" for function description
-void initializeDemoButtons(void)
+void initializeButtons(void)
 {
     // Initiliaze play Button
     playButton.xPosition = 100;

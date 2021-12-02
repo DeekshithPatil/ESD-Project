@@ -42,15 +42,10 @@ Graphics_Context g_sContext;
 extern bool g_ranDemo;
 
 void Delay(uint16_t msec);
-
-void boardInit(void);
-
 /*
- * Brief - Performs necessary clock initializations
+ * Brief - Used to initialise the buttons
  */
-void clockInit(void);
-
-void initializeDemoButtons(void);
+void initializeButtons(void);
 
 void drawMainMenu(void);
 

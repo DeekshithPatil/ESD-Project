@@ -24,6 +24,7 @@
 #include "images/images.h"
 #include "touch_P401R.h"
 #include "Display.h"
+#include "Init.h"
 
 int startGame();
 unsigned int getBoxNumber(uint16_t x, uint16_t y);
@@ -44,7 +45,7 @@ void main(void)
     /* Initialize the demo. */
     boardInit();
     clockInit();
-    initializeDemoButtons();
+    initializeButtons();
 
     /* Globally enable interrupts. */
     __enable_interrupt();
