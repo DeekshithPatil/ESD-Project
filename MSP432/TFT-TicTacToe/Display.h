@@ -38,10 +38,6 @@ extern Graphics_Button noButton;
 // Graphic library context
 Graphics_Context g_sContext;
 
-//Flag to know if a game was run
-extern bool g_ranGame;
-
-void Delay(uint16_t msec);
 /*
  * Brief - Used to initialise the buttons
  */

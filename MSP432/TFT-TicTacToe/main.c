@@ -25,6 +25,7 @@
 #include "touch_P401R.h"
 #include "Display.h"
 #include "Init.h"
+#include "Delay.h"
 
 int startGame();
 unsigned int getBoxNumber(uint16_t x, uint16_t y);
@@ -39,6 +40,8 @@ int getWinner(int index);
 
 void main(void)
 {
+    int winner;
+
     System_Init();
     drawMainMenu();
 
@@ -55,12 +58,10 @@ void main(void)
             {
                 Graphics_drawSelectedImageButton(&g_sContext,&playButton);
                 drawOutline();
-            }
 
-
-            if(g_ranGame == true)
-            {
-                g_ranGame = false;
+                winner = startGame();
+                Delay(1000);
+                drawRestartDemo(winner);
                 drawMainMenu();
             }
 
@@ -91,7 +92,6 @@ void drawMainMenu(void)
 
 void drawOutline(void)
 {
-    int winner;
 
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
     Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
@@ -106,10 +106,6 @@ void drawOutline(void)
     Graphics_drawLine(&g_sContext, 40, 153, 280, 153);
 
     Delay(2000);
-
-    winner = startGame();
-
-    drawRestartDemo(winner);
 }
 
 int startGame()
@@ -389,18 +385,3 @@ unsigned int getBoxNumber(uint16_t x, uint16_t y)
     return 0;
 }
 
-
-
-
-
-
-
-void Delay(uint16_t msec){
-    uint32_t i = 0;
-    uint32_t time = (msec / 1000) * (SYSTEM_CLOCK_SPEED / 15);
-
-    for(i = 0; i < time; i++)
-    {
-        ;
-    }
-}
