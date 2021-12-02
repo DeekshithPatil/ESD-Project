@@ -30,15 +30,18 @@
 #include "Display.h"
 
 /*
- * Used to Initialise MSP32
+ * Brief - Used to Initialise MSP32
  */
 void boardInit(void);
 
 /*
- * Used to initialise clock sources for necessary blocks
+ * Brief - Used to initialise clock sources for necessary blocks
  */
 void clockInit(void);
 
-
+/*
+ * Brief - Sets up the entire system and makes it ready to play the game
+ */
+void System_Init();
 
 #endif /* INIT_H_ */

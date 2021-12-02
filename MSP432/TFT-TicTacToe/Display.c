@@ -22,7 +22,7 @@ Graphics_Button noButton;
 Graphics_Context g_sContext;
 
 //Flag to know if a demo was run
-bool g_ranDemo = false;
+bool g_ranGame = false;
 
 //Refer "Display.h" for function description
 void drawRestartDemo(int winner)
@@ -37,7 +37,7 @@ void drawRestartDemo(int winner)
     else
         result = (int8_t *)player2;
 
-    g_ranDemo = false;
+    g_ranGame = false;
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
     Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
     Graphics_clearDisplay(&g_sContext);
@@ -67,14 +67,14 @@ void drawRestartDemo(int winner)
                                      g_sTouchContext.y))
         {
             Graphics_drawSelectedButton(&g_sContext, &noButton);
-            g_ranDemo = true;
+            g_ranGame = true;
         }
         else
         {
-            if(g_ranDemo)
+            if(g_ranGame)
             {
                 Graphics_drawReleasedButton(&g_sContext, &noButton);
-                g_ranDemo = false;
+                g_ranGame = false;
             }
         }
     }
@@ -83,7 +83,7 @@ void drawRestartDemo(int winner)
 
     Graphics_drawSelectedButton(&g_sContext, &yesButton);
 
-    g_ranDemo = true;
+    g_ranGame = true;
     Delay(1000);
 }
 

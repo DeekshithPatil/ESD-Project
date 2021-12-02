@@ -39,26 +39,7 @@ int getWinner(int index);
 
 void main(void)
 {
-//	int16_t ulIdx;
-    WDT_A_hold(WDT_A_BASE);
-
-    /* Initialize the demo. */
-    boardInit();
-    clockInit();
-    initializeButtons();
-
-    /* Globally enable interrupts. */
-    __enable_interrupt();
-
-    // LCD setup using Graphics Library API calls
-    Kitronix320x240x16_SSD2119Init();
-    Graphics_initContext(&g_sContext, &g_sKitronix320x240x16_SSD2119);
-    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
-    Graphics_setFont(&g_sContext, &g_sFontCmss20b);
-    Graphics_clearDisplay(&g_sContext);
-
-    touch_initInterface();
-
+    System_Init();
     drawMainMenu();
 
     // Loop to detect touch
@@ -77,9 +58,9 @@ void main(void)
             }
 
 
-            if(g_ranDemo == true)
+            if(g_ranGame == true)
             {
-                g_ranDemo = false;
+                g_ranGame = false;
                 drawMainMenu();
             }
 

@@ -395,8 +395,6 @@ void touch_calibrate(void)
     touch_calibrationData = calData;
 
     Graphics_clearDisplay(&g_sContext);
-
-    printf("\r\n Xmin = %d, Xmax = %d, Ymin = %d, Ymax = %d\r\n", calData.xMin, calData.xMax, calData.yMin, calData.yMax);
 }
 
 static bool validateCalibration(void){

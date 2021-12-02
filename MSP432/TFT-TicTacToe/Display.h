@@ -38,8 +38,8 @@ extern Graphics_Button noButton;
 // Graphic library context
 Graphics_Context g_sContext;
 
-//Flag to know if a demo was run
-extern bool g_ranDemo;
+//Flag to know if a game was run
+extern bool g_ranGame;
 
 void Delay(uint16_t msec);
 /*
