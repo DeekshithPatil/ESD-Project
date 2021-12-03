@@ -9,6 +9,7 @@
  */
 
 #include "Display.h"
+#include "Delay.h"
 
 //Touch screen context
 touch_context g_sTouchContext;
@@ -26,13 +27,16 @@ void drawRestartDemo(int winner)
 {
     char player1[] = "Player 1 has won the game!";
     char player2[] = "Player 2 has won the game!";
+    char draw[] = "It's a draw!";
 
     int8_t * result = NULL;
 
     if(winner == 1)
         result = (int8_t *)player1;
-    else
+    else if(winner == 2)
         result = (int8_t *)player2;
+    else if(winner == 0)
+        result = (int8_t *)draw;
 
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
     Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
@@ -120,7 +124,44 @@ void initializeButtons(void)
     noButton.font = &g_sFontCm18;
 }
 
+//Refer "Display.h" for function description
+void drawMainMenu(void)
+{
+    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+    Graphics_clearDisplay(&g_sContext);
+    Graphics_drawStringCentered(&g_sContext, "Tic Tac Toe Gaming Console",
+                                AUTO_STRING_LENGTH,
+                                159,
+                                15,
+                                TRANSPARENT_TEXT);
 
+    // Draw Primitives image button
+    Graphics_drawImageButton(&g_sContext, &playButton);
 
+    Graphics_drawStringCentered(&g_sContext, "Start",
+                                10, //AUTO_STRING_LENGTH
+                                160,
+                                115,
+                                TRANSPARENT_TEXT);
+}
 
+//Refer "Display.h" for function description
+void drawOutline(void)
+{
+
+    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+    Graphics_setBackgroundColor(&g_sContext, GRAPHICS_COLOR_BLACK);
+    Graphics_clearDisplay(&g_sContext);
+
+    //Vertical Lines
+    Graphics_drawLine(&g_sContext, 120, 20, 120, 220);
+    Graphics_drawLine(&g_sContext, 200, 20, 200, 220);
+
+    //Horizontal Lines
+    Graphics_drawLine(&g_sContext, 40, 87, 280, 87);
+    Graphics_drawLine(&g_sContext, 40, 153, 280, 153);
+
+//    Delay(2000);
+}
 

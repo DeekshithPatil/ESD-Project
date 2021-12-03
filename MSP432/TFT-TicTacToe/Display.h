@@ -43,8 +43,14 @@ Graphics_Context g_sContext;
  */
 void initializeButtons(void);
 
+/*
+ * Brief - Used to draw the main menu or the home screen
+ */
 void drawMainMenu(void);
 
+/*
+ * Brief - Draws an outline (#) of the game on the screen
+ */
 void drawOutline(void);
 
 /*
