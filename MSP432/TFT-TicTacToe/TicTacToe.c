@@ -37,8 +37,6 @@ int startGame()
 
     bool GameOver = false;
 
-//    int8_t clear = ' ';
-
     while(1)
     {
         touch_updateCurrentTouch(&g_sTouchContext);
@@ -276,6 +274,13 @@ static bool isGameOver(int arr[3][3])
 
     int sum = 0;
 
+    int x1 = 40;
+    int y1 = 54;
+    int x2 = 280;
+    int y2 = 54;
+
+    Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
+
     //Check horizontal
     for(i = 0; i<3; i++)
     {
@@ -286,12 +291,20 @@ static bool isGameOver(int arr[3][3])
 
         if(sum == 3 || sum == -3)
         {
+            Graphics_drawLine(&g_sContext, x1, y1, x2, y2);
             return true;
         }
+        y1 += 67;
+        y2 += 67;
         sum = 0;
     }
 
     //Check vertical
+    x1 = 80;
+    y1 = 20;
+    x2 = 80;
+    y2 = 220;
+
     sum = 0;
     for(i=0; i<3; i++)
     {
@@ -299,10 +312,14 @@ static bool isGameOver(int arr[3][3])
         {
             sum += arr[j][i];
         }
+
         if(sum == 3 || sum == -3)
         {
+            Graphics_drawLine(&g_sContext, x1, y1, x2, y2);
             return true;
         }
+        x1 += 80;
+        x2 += 80;
         sum = 0;
     }
 
@@ -310,6 +327,7 @@ static bool isGameOver(int arr[3][3])
     sum = arr[0][0] + arr[1][1] + arr[2][2];
     if(sum == 3 || sum == -3)
     {
+        Graphics_drawLine(&g_sContext, 40, 20, 280, 220);
         return true;
     }
 
@@ -317,6 +335,7 @@ static bool isGameOver(int arr[3][3])
     sum = arr[0][2] + arr[1][1] + arr[2][0];
     if(sum == 3 || sum == -3)
     {
+        Graphics_drawLine(&g_sContext,280, 20, 40,220);
         return true;
     }
 
