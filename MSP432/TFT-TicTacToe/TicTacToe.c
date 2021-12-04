@@ -74,6 +74,12 @@ static bool isGameOver(int arr[3][3]);
 #define BOX_9_Y_LOW                                 153
 #define BOX_9_Y_HIGH                                220
 
+#define MAX_ROWS                                    3
+#define MAX_COLUMNS                                 3
+
+#define PLAYER_1_VICTORY_SUM                        3
+#define PLAYER_2_VICTORY_SUM                       -3
+
 const int PLAYER_1_INDEX = 0;
 const int PLAYER_2_INDEX = 1;
 
@@ -310,14 +316,14 @@ void getRowAndColumn(int boxNumber, int *rowNumber,int *columnNumber)
     int row, column;
     int temp;
 
-    if(boxNumber >=1 && boxNumber <= 3)
+    if(boxNumber >=FIRST_BOX && boxNumber <= THIRD_BOX)
         row = 0;
-    else if(boxNumber >=4 && boxNumber <=6)
+    else if(boxNumber >=FOURTH_BOX && boxNumber <=SIXTH_BOX)
         row = 1;
     else
         row = 2;
 
-    temp = boxNumber % 3;
+    temp = boxNumber % MAX_COLUMNS;
 
     if(temp == 0)
         column = 2;
@@ -339,68 +345,90 @@ static bool isGameOver(int arr[3][3])
 
     int sum = 0;
 
-    int x1 = 40;
-    int y1 = 54;
-    int x2 = 280;
-    int y2 = 54;
+    const int VERTICAL_X1 = 80;
+    const int VERTICAL_Y1 = 20;
+    const int VERTICAL_X2 = 80;
+    const int VERTICAL_Y2 = 220;
+    const int VERTICAL_OFFSET = 80;
+
+    const int HORIZONTAL_X1 = 40;
+    const int HORIZONTAL_Y1 = 54;
+    const int HORIZONTAL_X2 = 280;
+    const int HORIZONTAL_Y2 = 54;
+    const int HORIZONTAL_OFFSET = 67;
+
+    const int TOP_LEFT_X   = 40;
+    const int TOP_LEFT_Y   = 20;
+    const int BOTTOM_RIGHT_X = 280;
+    const int BOTTOM_RIGHT_Y = 220;
+
+    const int TOP_RIGHT_X   = 280;
+    const int TOP_RIGHT_Y   = 20;
+    const int BOTTOM_LEFT_X = 40;
+    const int BOTTOM_LEFT_Y = 220;
+
+    int x1 = HORIZONTAL_X1;
+    int y1 = HORIZONTAL_Y1;
+    int x2 = HORIZONTAL_X2;
+    int y2 = HORIZONTAL_Y2;
 
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
 
     //Check horizontal
-    for(i = 0; i<3; i++)
+    for(i = 0; i<MAX_ROWS; i++)
     {
-        for(j=0;j<3;j++)
+        for(j=0;j<MAX_COLUMNS;j++)
         {
             sum += arr[i][j];
         }
 
-        if(sum == 3 || sum == -3)
+        if(sum == PLAYER_1_VICTORY_SUM || sum == PLAYER_2_VICTORY_SUM)
         {
             Graphics_drawLine(&g_sContext, x1, y1, x2, y2);
             return true;
         }
-        y1 += 67;
-        y2 += 67;
+        y1 += HORIZONTAL_OFFSET;
+        y2 += HORIZONTAL_OFFSET;
         sum = 0;
     }
 
     //Check vertical
-    x1 = 80;
-    y1 = 20;
-    x2 = 80;
-    y2 = 220;
+    x1 = VERTICAL_X1;
+    y1 = VERTICAL_Y1;
+    x2 = VERTICAL_X2;
+    y2 = VERTICAL_Y2;
 
     sum = 0;
-    for(i=0; i<3; i++)
+    for(i=0; i<MAX_ROWS; i++)
     {
-        for(j=0; j<3; j++)
+        for(j=0; j<MAX_COLUMNS; j++)
         {
             sum += arr[j][i];
         }
 
-        if(sum == 3 || sum == -3)
+        if(sum == PLAYER_1_VICTORY_SUM || sum == PLAYER_2_VICTORY_SUM)
         {
             Graphics_drawLine(&g_sContext, x1, y1, x2, y2);
             return true;
         }
-        x1 += 80;
-        x2 += 80;
+        x1 += VERTICAL_OFFSET;
+        x2 += VERTICAL_OFFSET;
         sum = 0;
     }
 
     //Check top-left corner to bottom-right corner
     sum = arr[0][0] + arr[1][1] + arr[2][2];
-    if(sum == 3 || sum == -3)
+    if(sum == PLAYER_1_VICTORY_SUM || sum == PLAYER_2_VICTORY_SUM)
     {
-        Graphics_drawLine(&g_sContext, 40, 20, 280, 220);
+        Graphics_drawLine(&g_sContext, TOP_LEFT_X, TOP_LEFT_Y, BOTTOM_RIGHT_X, BOTTOM_RIGHT_Y);
         return true;
     }
 
     //Check top-right corner to bottom-left corner
     sum = arr[0][2] + arr[1][1] + arr[2][0];
-    if(sum == 3 || sum == -3)
+    if(sum == PLAYER_1_VICTORY_SUM || sum == PLAYER_2_VICTORY_SUM)
     {
-        Graphics_drawLine(&g_sContext,280, 20, 40,220);
+        Graphics_drawLine(&g_sContext,TOP_RIGHT_X, TOP_RIGHT_Y, BOTTOM_LEFT_X,BOTTOM_LEFT_Y);
         return true;
     }
 
