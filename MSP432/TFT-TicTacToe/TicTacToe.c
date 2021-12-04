@@ -74,6 +74,9 @@ static bool isGameOver(int arr[3][3]);
 #define BOX_9_Y_LOW                                 153
 #define BOX_9_Y_HIGH                                220
 
+const int PLAYER_1_INDEX = 0;
+const int PLAYER_2_INDEX = 1;
+
 //Refer "TicTacToe.h" function description
 int startGame()
 {
@@ -224,10 +227,11 @@ int startGame()
  */
 static int getWinner(index)
 {
-    if(index == 0)
-        return 2;
+
+    if(index == PLAYER_1_INDEX) // Currently index is at player 1 (updated index after winner had made the move), therefore player 2 is the winner
+        return PLAYER_2;
     else
-        return 1;
+        return PLAYER_1;
 }
 
 /*
@@ -236,10 +240,13 @@ static int getWinner(index)
  */
 static int getInsertVal(int index)
 {
-    if(index == 0)
-        return -1;
+    const int PLAYER_1_INSERT_VAL = 1;
+    const int PLAYER_2_INSERT_VAL = -1;
 
-    return 1;
+    if(index == PLAYER_1_INDEX)
+        return PLAYER_1_INSERT_VAL;
+
+    return PLAYER_2_INSERT_VAL;
 }
 
 /*
