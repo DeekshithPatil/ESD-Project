@@ -32,22 +32,28 @@ void main(void)
 {
     int winner;
 
+    //Initialise all the necessary modules and calibrate touch screen
     System_Init();
+
+    //Draw the main menu option
     drawMainMenu();
 
     // Loop to detect touch
     while(1)
     {
+        //Check if any touch has occured
         touch_updateCurrentTouch(&g_sTouchContext);
 
         if(g_sTouchContext.touch)
         {
+            //Check if start is selected
             if(Graphics_isImageButtonSelected(&playButton,
                                               g_sTouchContext.x,
                                               g_sTouchContext.y))
             {
+
                 Graphics_drawSelectedImageButton(&g_sContext,&playButton);
-                drawOutline();
+                drawOutline(); //Draw basic outline structure and start game
 
                 winner = startGame();
                 Delay(1000);

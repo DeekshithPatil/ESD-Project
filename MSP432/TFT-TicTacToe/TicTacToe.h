@@ -31,6 +31,9 @@
 #include "Init.h"
 #include "Delay.h"
 
+#define PLAYER_1                         1
+#define PLAYER_2                         2
+#define NO_WINNER                        0
 /*
  * Brief - Used to start the game. Returns the winner of the game (player number)
  */

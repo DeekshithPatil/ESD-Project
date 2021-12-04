@@ -10,6 +10,7 @@
 
 #include "Display.h"
 #include "Delay.h"
+#include "TicTacToe.h"
 
 //Touch screen context
 touch_context g_sTouchContext;
@@ -31,11 +32,12 @@ void drawRestartDemo(int winner)
 
     int8_t * result = NULL;
 
-    if(winner == 1)
+    //Check who the winner was
+    if(winner == PLAYER_1)
         result = (int8_t *)player1;
-    else if(winner == 2)
+    else if(winner == PLAYER_2)
         result = (int8_t *)player2;
-    else if(winner == 0)
+    else if(winner == NO_WINNER)
         result = (int8_t *)draw;
 
     Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
@@ -162,6 +164,5 @@ void drawOutline(void)
     Graphics_drawLine(&g_sContext, 40, 87, 280, 87);
     Graphics_drawLine(&g_sContext, 40, 153, 280, 153);
 
-//    Delay(2000);
 }
 

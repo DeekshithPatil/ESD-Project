@@ -16,6 +16,64 @@ static unsigned int getBoxNumber(uint16_t x, uint16_t y);
 static void getRowAndColumn(int boxNumber, int *rowNumber,int *columnNumber);
 static bool isGameOver(int arr[3][3]);
 
+#define PLAYER_TURN_X                               10
+#define PLAYER_TURN_Y                               10
+
+#define FIRST_BOX                                   1
+#define SECOND_BOX                                  2
+#define THIRD_BOX                                   3
+#define FOURTH_BOX                                  4
+#define FIFTH_BOX                                   5
+#define SIXTH_BOX                                   6
+#define SEVENTH_BOX                                 7
+#define EIGHTH_BOX                                  8
+#define NINETH_BOX                                  9
+
+#define BOX_1_X_LOW                                 40
+#define BOX_1_X_HIGH                                120
+#define BOX_1_Y_LOW                                 20
+#define BOX_1_Y_HIGH                                87
+
+#define BOX_2_X_LOW                                 120
+#define BOX_2_X_HIGH                                200
+#define BOX_2_Y_LOW                                 20
+#define BOX_2_Y_HIGH                                87
+
+#define BOX_3_X_LOW                                 200
+#define BOX_3_X_HIGH                                280
+#define BOX_3_Y_LOW                                 20
+#define BOX_3_Y_HIGH                                87
+
+#define BOX_4_X_LOW                                 40
+#define BOX_4_X_HIGH                                120
+#define BOX_4_Y_LOW                                 87
+#define BOX_4_Y_HIGH                                153
+
+#define BOX_5_X_LOW                                 120
+#define BOX_5_X_HIGH                                200
+#define BOX_5_Y_LOW                                 87
+#define BOX_5_Y_HIGH                                153
+
+#define BOX_6_X_LOW                                 200
+#define BOX_6_X_HIGH                                280
+#define BOX_6_Y_LOW                                 87
+#define BOX_6_Y_HIGH                                153
+
+#define BOX_7_X_LOW                                 40
+#define BOX_7_X_HIGH                                120
+#define BOX_7_Y_LOW                                 153
+#define BOX_7_Y_HIGH                                220
+
+#define BOX_8_X_LOW                                 120
+#define BOX_8_X_HIGH                                200
+#define BOX_8_Y_LOW                                 153
+#define BOX_8_Y_HIGH                                220
+
+#define BOX_9_X_LOW                                 200
+#define BOX_9_X_HIGH                                280
+#define BOX_9_Y_LOW                                 153
+#define BOX_9_Y_HIGH                                220
+
 //Refer "TicTacToe.h" function description
 int startGame()
 {
@@ -41,14 +99,14 @@ int startGame()
     {
         touch_updateCurrentTouch(&g_sTouchContext);
         Graphics_setForegroundColor(&g_sContext, GRAPHICS_COLOR_RED);
-        Graphics_drawStringCentered(&g_sContext, &character[index], 1, 10, 10, TRANSPARENT_TEXT);
+        Graphics_drawStringCentered(&g_sContext, &character[index], 1, PLAYER_TURN_X, PLAYER_TURN_Y, TRANSPARENT_TEXT);
 
         if(g_sTouchContext.touch)
         {
 
             boxNumber = getBoxNumber(g_sTouchContext.x, g_sTouchContext.y);
 
-            if(boxNumber == 1 && (!isBoxSelected[boxNumber]))
+            if(boxNumber == FIRST_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 80, 54, TRANSPARENT_TEXT);
 
@@ -58,7 +116,7 @@ int startGame()
 
             }
 
-            else if(boxNumber == 2 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == SECOND_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 160, 54, TRANSPARENT_TEXT);
 
@@ -67,7 +125,7 @@ int startGame()
                 isBoxSelected[boxNumber] = true;
             }
 
-            else if(boxNumber == 3 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == THIRD_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 240, 54, TRANSPARENT_TEXT);
 
@@ -77,7 +135,7 @@ int startGame()
 
             }
 
-            else if(boxNumber == 4 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == FOURTH_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 80, 120, TRANSPARENT_TEXT);
 
@@ -87,7 +145,7 @@ int startGame()
 
             }
 
-            else if(boxNumber == 5 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == FIFTH_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 160, 120, TRANSPARENT_TEXT);
 
@@ -97,7 +155,7 @@ int startGame()
 
             }
 
-            else if(boxNumber == 6 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == SIXTH_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 240, 120, TRANSPARENT_TEXT);
 
@@ -107,7 +165,7 @@ int startGame()
 
             }
 
-            else if(boxNumber == 7 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == SEVENTH_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 80, 187, TRANSPARENT_TEXT);
 
@@ -117,7 +175,7 @@ int startGame()
                 arr[2][0] = index;
             }
 
-            else if(boxNumber == 8 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == EIGHTH_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 160, 187, TRANSPARENT_TEXT);
 
@@ -127,7 +185,7 @@ int startGame()
 
             }
 
-            else if(boxNumber == 9 && (!isBoxSelected[boxNumber]))
+            else if(boxNumber == NINETH_BOX && (!isBoxSelected[boxNumber]))
             {
                 Graphics_drawStringCentered(&g_sContext, &character[index], 1, 240, 187, TRANSPARENT_TEXT);
 
@@ -189,49 +247,49 @@ static int getInsertVal(int index)
  */
 static unsigned int getBoxNumber(uint16_t x, uint16_t y)
 {
-    if((x >= 40 && x <= 120) && (y >= 20 && y <= 87))
+    if((x >= BOX_1_X_LOW && x <= BOX_1_X_HIGH) && (y >= BOX_1_Y_LOW && y <= BOX_1_Y_HIGH))
     {
-        return 1;
+        return FIRST_BOX;
     }
 
-    if((x > 120 && x<= 200) && (y >= 20 && y <= 87))
+    if((x > BOX_2_X_LOW && x<= BOX_2_X_HIGH) && (y >= BOX_2_Y_LOW && y <= BOX_2_Y_HIGH))
     {
-        return 2;
+        return SECOND_BOX;
     }
 
-    if((x > 200 && x<= 280) && (y >= 20 && y <= 87))
+    if((x > BOX_3_X_LOW && x<= BOX_3_X_HIGH) && (y >= BOX_3_Y_LOW && y <= BOX_3_Y_HIGH))
     {
-        return 3;
+        return THIRD_BOX;
     }
 
-    if((x >= 40 && x <= 120) && (y > 87 && y <= 153))
+    if((x >= BOX_4_X_LOW && x <= BOX_4_X_HIGH) && (y > BOX_4_Y_LOW && y <= BOX_4_Y_HIGH))
     {
-        return 4;
+        return FOURTH_BOX;
     }
 
-    if((x > 120 && x<= 200) && (y > 87 && y <= 153))
+    if((x > BOX_5_X_LOW && x<= BOX_5_X_HIGH) && (y > BOX_5_Y_LOW && y <= BOX_5_Y_HIGH))
     {
-        return 5;
+        return FIFTH_BOX;
     }
 
-    if((x > 200 && x<= 280) && (y > 87 && y <= 153))
+    if((x > BOX_6_X_LOW && x<= BOX_6_X_HIGH) && (y > BOX_6_Y_LOW && y <= BOX_6_Y_HIGH))
     {
-        return 6;
+        return SIXTH_BOX;
     }
 
-    if((x >= 40 && x <= 120) && (y > 153 && y <= 220))
+    if((x >= BOX_7_X_LOW && x <= BOX_7_X_HIGH) && (y > BOX_7_Y_LOW && y <= BOX_7_Y_HIGH))
     {
-        return 7;
+        return SEVENTH_BOX;
     }
 
-    if((x > 120 && x<= 200) && (y > 153 && y <= 220))
+    if((x > BOX_8_X_LOW && x<= BOX_8_X_HIGH) && (y > BOX_8_Y_LOW && y <= BOX_8_Y_HIGH))
     {
-        return 8;
+        return EIGHTH_BOX;
     }
 
-    if((x > 200 && x<= 280) && (y > 153 && y <= 220))
+    if((x > BOX_9_X_LOW && x<= BOX_9_X_HIGH) && (y > BOX_9_Y_LOW && y <= BOX_9_Y_HIGH))
     {
-        return 9;
+        return NINETH_BOX;
     }
 
     return 0;

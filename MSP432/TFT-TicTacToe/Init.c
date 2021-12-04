@@ -10,6 +10,8 @@
 
 #include "Init.h"
 
+#define CLOCK_FREQUENCY                 48000000
+
 //Refer "Init.h" for function description
 void boardInit()
 {
@@ -24,7 +26,7 @@ void clockInit(void)
     FlashCtl_setWaitState(FLASH_BANK1, 2);
     PCM_setPowerState(PCM_AM_DCDC_VCORE1);
     CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);
-    CS_setDCOFrequency(48000000);
+    CS_setDCOFrequency(CLOCK_FREQUENCY);
     CS_initClockSignal(CS_MCLK, CS_DCOCLK_SELECT, 1);
     CS_initClockSignal(CS_SMCLK, CS_DCOCLK_SELECT, 1);
     CS_initClockSignal(CS_HSMCLK, CS_DCOCLK_SELECT, 1);
