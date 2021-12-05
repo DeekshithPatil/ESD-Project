@@ -1,0 +1,1982 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.9.0 #11195 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module ttt
+                                      6 	.optsdcc -mmcs51 --model-large
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _A
+                                     12 	.globl _restartGame
+                                     13 	.globl _putO
+                                     14 	.globl _putX
+                                     15 	.globl _ccSWO
+                                     16 	.globl _ccSWX
+                                     17 	.globl _ccSquare
+                                     18 	.globl _lcdgotoaddr
+                                     19 	.globl _lcdputstr
+                                     20 	.globl _lcd_data
+                                     21 	.globl _lcd_cmd
+                                     22 	.globl _delay
+                                     23 	.globl _getchar
+                                     24 	.globl _TF1
+                                     25 	.globl _TR1
+                                     26 	.globl _TF0
+                                     27 	.globl _TR0
+                                     28 	.globl _IE1
+                                     29 	.globl _IT1
+                                     30 	.globl _IE0
+                                     31 	.globl _IT0
+                                     32 	.globl _SM0
+                                     33 	.globl _SM1
+                                     34 	.globl _SM2
+                                     35 	.globl _REN
+                                     36 	.globl _TB8
+                                     37 	.globl _RB8
+                                     38 	.globl _TI
+                                     39 	.globl _RI
+                                     40 	.globl _CY
+                                     41 	.globl _AC
+                                     42 	.globl _F0
+                                     43 	.globl _RS1
+                                     44 	.globl _RS0
+                                     45 	.globl _OV
+                                     46 	.globl _F1
+                                     47 	.globl _P
+                                     48 	.globl _RD
+                                     49 	.globl _WR
+                                     50 	.globl _T1
+                                     51 	.globl _T0
+                                     52 	.globl _INT1
+                                     53 	.globl _INT0
+                                     54 	.globl _TXD0
+                                     55 	.globl _TXD
+                                     56 	.globl _RXD0
+                                     57 	.globl _RXD
+                                     58 	.globl _P3_7
+                                     59 	.globl _P3_6
+                                     60 	.globl _P3_5
+                                     61 	.globl _P3_4
+                                     62 	.globl _P3_3
+                                     63 	.globl _P3_2
+                                     64 	.globl _P3_1
+                                     65 	.globl _P3_0
+                                     66 	.globl _P2_7
+                                     67 	.globl _P2_6
+                                     68 	.globl _P2_5
+                                     69 	.globl _P2_4
+                                     70 	.globl _P2_3
+                                     71 	.globl _P2_2
+                                     72 	.globl _P2_1
+                                     73 	.globl _P2_0
+                                     74 	.globl _P1_7
+                                     75 	.globl _P1_6
+                                     76 	.globl _P1_5
+                                     77 	.globl _P1_4
+                                     78 	.globl _P1_3
+                                     79 	.globl _P1_2
+                                     80 	.globl _P1_1
+                                     81 	.globl _P1_0
+                                     82 	.globl _P0_7
+                                     83 	.globl _P0_6
+                                     84 	.globl _P0_5
+                                     85 	.globl _P0_4
+                                     86 	.globl _P0_3
+                                     87 	.globl _P0_2
+                                     88 	.globl _P0_1
+                                     89 	.globl _P0_0
+                                     90 	.globl _PS
+                                     91 	.globl _PT1
+                                     92 	.globl _PX1
+                                     93 	.globl _PT0
+                                     94 	.globl _PX0
+                                     95 	.globl _EA
+                                     96 	.globl _ES
+                                     97 	.globl _ET1
+                                     98 	.globl _EX1
+                                     99 	.globl _ET0
+                                    100 	.globl _EX0
+                                    101 	.globl _BREG_F7
+                                    102 	.globl _BREG_F6
+                                    103 	.globl _BREG_F5
+                                    104 	.globl _BREG_F4
+                                    105 	.globl _BREG_F3
+                                    106 	.globl _BREG_F2
+                                    107 	.globl _BREG_F1
+                                    108 	.globl _BREG_F0
+                                    109 	.globl _P5_7
+                                    110 	.globl _P5_6
+                                    111 	.globl _P5_5
+                                    112 	.globl _P5_4
+                                    113 	.globl _P5_3
+                                    114 	.globl _P5_2
+                                    115 	.globl _P5_1
+                                    116 	.globl _P5_0
+                                    117 	.globl _P4_7
+                                    118 	.globl _P4_6
+                                    119 	.globl _P4_5
+                                    120 	.globl _P4_4
+                                    121 	.globl _P4_3
+                                    122 	.globl _P4_2
+                                    123 	.globl _P4_1
+                                    124 	.globl _P4_0
+                                    125 	.globl _PX0L
+                                    126 	.globl _PT0L
+                                    127 	.globl _PX1L
+                                    128 	.globl _PT1L
+                                    129 	.globl _PSL
+                                    130 	.globl _PT2L
+                                    131 	.globl _PPCL
+                                    132 	.globl _EC
+                                    133 	.globl _CCF0
+                                    134 	.globl _CCF1
+                                    135 	.globl _CCF2
+                                    136 	.globl _CCF3
+                                    137 	.globl _CCF4
+                                    138 	.globl _CR
+                                    139 	.globl _CF
+                                    140 	.globl _TF2
+                                    141 	.globl _EXF2
+                                    142 	.globl _RCLK
+                                    143 	.globl _TCLK
+                                    144 	.globl _EXEN2
+                                    145 	.globl _TR2
+                                    146 	.globl _C_T2
+                                    147 	.globl _CP_RL2
+                                    148 	.globl _T2CON_7
+                                    149 	.globl _T2CON_6
+                                    150 	.globl _T2CON_5
+                                    151 	.globl _T2CON_4
+                                    152 	.globl _T2CON_3
+                                    153 	.globl _T2CON_2
+                                    154 	.globl _T2CON_1
+                                    155 	.globl _T2CON_0
+                                    156 	.globl _PT2
+                                    157 	.globl _ET2
+                                    158 	.globl _TMOD
+                                    159 	.globl _TL1
+                                    160 	.globl _TL0
+                                    161 	.globl _TH1
+                                    162 	.globl _TH0
+                                    163 	.globl _TCON
+                                    164 	.globl _SP
+                                    165 	.globl _SCON
+                                    166 	.globl _SBUF0
+                                    167 	.globl _SBUF
+                                    168 	.globl _PSW
+                                    169 	.globl _PCON
+                                    170 	.globl _P3
+                                    171 	.globl _P2
+                                    172 	.globl _P1
+                                    173 	.globl _P0
+                                    174 	.globl _IP
+                                    175 	.globl _IE
+                                    176 	.globl _DP0L
+                                    177 	.globl _DPL
+                                    178 	.globl _DP0H
+                                    179 	.globl _DPH
+                                    180 	.globl _B
+                                    181 	.globl _ACC
+                                    182 	.globl _EECON
+                                    183 	.globl _KBF
+                                    184 	.globl _KBE
+                                    185 	.globl _KBLS
+                                    186 	.globl _BRL
+                                    187 	.globl _BDRCON
+                                    188 	.globl _T2MOD
+                                    189 	.globl _SPDAT
+                                    190 	.globl _SPSTA
+                                    191 	.globl _SPCON
+                                    192 	.globl _SADEN
+                                    193 	.globl _SADDR
+                                    194 	.globl _WDTPRG
+                                    195 	.globl _WDTRST
+                                    196 	.globl _P5
+                                    197 	.globl _P4
+                                    198 	.globl _IPH1
+                                    199 	.globl _IPL1
+                                    200 	.globl _IPH0
+                                    201 	.globl _IPL0
+                                    202 	.globl _IEN1
+                                    203 	.globl _IEN0
+                                    204 	.globl _CMOD
+                                    205 	.globl _CL
+                                    206 	.globl _CH
+                                    207 	.globl _CCON
+                                    208 	.globl _CCAPM4
+                                    209 	.globl _CCAPM3
+                                    210 	.globl _CCAPM2
+                                    211 	.globl _CCAPM1
+                                    212 	.globl _CCAPM0
+                                    213 	.globl _CCAP4L
+                                    214 	.globl _CCAP3L
+                                    215 	.globl _CCAP2L
+                                    216 	.globl _CCAP1L
+                                    217 	.globl _CCAP0L
+                                    218 	.globl _CCAP4H
+                                    219 	.globl _CCAP3H
+                                    220 	.globl _CCAP2H
+                                    221 	.globl _CCAP1H
+                                    222 	.globl _CCAP0H
+                                    223 	.globl _CKCON1
+                                    224 	.globl _CKCON0
+                                    225 	.globl _CKRL
+                                    226 	.globl _AUXR1
+                                    227 	.globl _AUXR
+                                    228 	.globl _TH2
+                                    229 	.globl _TL2
+                                    230 	.globl _RCAP2H
+                                    231 	.globl _RCAP2L
+                                    232 	.globl _T2CON
+                                    233 	.globl _squareWO
+                                    234 	.globl _squareWX
+                                    235 	.globl _square
+                                    236 	.globl _currentPlayer
+                                    237 	.globl _currentIndex
+                                    238 	.globl _currentPos
+                                    239 	.globl _M
+                                    240 	.globl _startGame
+                                    241 	.globl _Init_Game
+                                    242 	.globl _changeState
+                                    243 	.globl _gameDecision
+                                    244 	.globl _gameOver
+                                    245 ;--------------------------------------------------------
+                                    246 ; special function registers
+                                    247 ;--------------------------------------------------------
+                                    248 	.area RSEG    (ABS,DATA)
+      000000                        249 	.org 0x0000
+                           0000C8   250 _T2CON	=	0x00c8
+                           0000CA   251 _RCAP2L	=	0x00ca
+                           0000CB   252 _RCAP2H	=	0x00cb
+                           0000CC   253 _TL2	=	0x00cc
+                           0000CD   254 _TH2	=	0x00cd
+                           00008E   255 _AUXR	=	0x008e
+                           0000A2   256 _AUXR1	=	0x00a2
+                           000097   257 _CKRL	=	0x0097
+                           00008F   258 _CKCON0	=	0x008f
+                           0000AF   259 _CKCON1	=	0x00af
+                           0000FA   260 _CCAP0H	=	0x00fa
+                           0000FB   261 _CCAP1H	=	0x00fb
+                           0000FC   262 _CCAP2H	=	0x00fc
+                           0000FD   263 _CCAP3H	=	0x00fd
+                           0000FE   264 _CCAP4H	=	0x00fe
+                           0000EA   265 _CCAP0L	=	0x00ea
+                           0000EB   266 _CCAP1L	=	0x00eb
+                           0000EC   267 _CCAP2L	=	0x00ec
+                           0000ED   268 _CCAP3L	=	0x00ed
+                           0000EE   269 _CCAP4L	=	0x00ee
+                           0000DA   270 _CCAPM0	=	0x00da
+                           0000DB   271 _CCAPM1	=	0x00db
+                           0000DC   272 _CCAPM2	=	0x00dc
+                           0000DD   273 _CCAPM3	=	0x00dd
+                           0000DE   274 _CCAPM4	=	0x00de
+                           0000D8   275 _CCON	=	0x00d8
+                           0000F9   276 _CH	=	0x00f9
+                           0000E9   277 _CL	=	0x00e9
+                           0000D9   278 _CMOD	=	0x00d9
+                           0000A8   279 _IEN0	=	0x00a8
+                           0000B1   280 _IEN1	=	0x00b1
+                           0000B8   281 _IPL0	=	0x00b8
+                           0000B7   282 _IPH0	=	0x00b7
+                           0000B2   283 _IPL1	=	0x00b2
+                           0000B3   284 _IPH1	=	0x00b3
+                           0000C0   285 _P4	=	0x00c0
+                           0000E8   286 _P5	=	0x00e8
+                           0000A6   287 _WDTRST	=	0x00a6
+                           0000A7   288 _WDTPRG	=	0x00a7
+                           0000A9   289 _SADDR	=	0x00a9
+                           0000B9   290 _SADEN	=	0x00b9
+                           0000C3   291 _SPCON	=	0x00c3
+                           0000C4   292 _SPSTA	=	0x00c4
+                           0000C5   293 _SPDAT	=	0x00c5
+                           0000C9   294 _T2MOD	=	0x00c9
+                           00009B   295 _BDRCON	=	0x009b
+                           00009A   296 _BRL	=	0x009a
+                           00009C   297 _KBLS	=	0x009c
+                           00009D   298 _KBE	=	0x009d
+                           00009E   299 _KBF	=	0x009e
+                           0000D2   300 _EECON	=	0x00d2
+                           0000E0   301 _ACC	=	0x00e0
+                           0000F0   302 _B	=	0x00f0
+                           000083   303 _DPH	=	0x0083
+                           000083   304 _DP0H	=	0x0083
+                           000082   305 _DPL	=	0x0082
+                           000082   306 _DP0L	=	0x0082
+                           0000A8   307 _IE	=	0x00a8
+                           0000B8   308 _IP	=	0x00b8
+                           000080   309 _P0	=	0x0080
+                           000090   310 _P1	=	0x0090
+                           0000A0   311 _P2	=	0x00a0
+                           0000B0   312 _P3	=	0x00b0
+                           000087   313 _PCON	=	0x0087
+                           0000D0   314 _PSW	=	0x00d0
+                           000099   315 _SBUF	=	0x0099
+                           000099   316 _SBUF0	=	0x0099
+                           000098   317 _SCON	=	0x0098
+                           000081   318 _SP	=	0x0081
+                           000088   319 _TCON	=	0x0088
+                           00008C   320 _TH0	=	0x008c
+                           00008D   321 _TH1	=	0x008d
+                           00008A   322 _TL0	=	0x008a
+                           00008B   323 _TL1	=	0x008b
+                           000089   324 _TMOD	=	0x0089
+                                    325 ;--------------------------------------------------------
+                                    326 ; special function bits
+                                    327 ;--------------------------------------------------------
+                                    328 	.area RSEG    (ABS,DATA)
+      000000                        329 	.org 0x0000
+                           0000AD   330 _ET2	=	0x00ad
+                           0000BD   331 _PT2	=	0x00bd
+                           0000C8   332 _T2CON_0	=	0x00c8
+                           0000C9   333 _T2CON_1	=	0x00c9
+                           0000CA   334 _T2CON_2	=	0x00ca
+                           0000CB   335 _T2CON_3	=	0x00cb
+                           0000CC   336 _T2CON_4	=	0x00cc
+                           0000CD   337 _T2CON_5	=	0x00cd
+                           0000CE   338 _T2CON_6	=	0x00ce
+                           0000CF   339 _T2CON_7	=	0x00cf
+                           0000C8   340 _CP_RL2	=	0x00c8
+                           0000C9   341 _C_T2	=	0x00c9
+                           0000CA   342 _TR2	=	0x00ca
+                           0000CB   343 _EXEN2	=	0x00cb
+                           0000CC   344 _TCLK	=	0x00cc
+                           0000CD   345 _RCLK	=	0x00cd
+                           0000CE   346 _EXF2	=	0x00ce
+                           0000CF   347 _TF2	=	0x00cf
+                           0000DF   348 _CF	=	0x00df
+                           0000DE   349 _CR	=	0x00de
+                           0000DC   350 _CCF4	=	0x00dc
+                           0000DB   351 _CCF3	=	0x00db
+                           0000DA   352 _CCF2	=	0x00da
+                           0000D9   353 _CCF1	=	0x00d9
+                           0000D8   354 _CCF0	=	0x00d8
+                           0000AE   355 _EC	=	0x00ae
+                           0000BE   356 _PPCL	=	0x00be
+                           0000BD   357 _PT2L	=	0x00bd
+                           0000BC   358 _PSL	=	0x00bc
+                           0000BB   359 _PT1L	=	0x00bb
+                           0000BA   360 _PX1L	=	0x00ba
+                           0000B9   361 _PT0L	=	0x00b9
+                           0000B8   362 _PX0L	=	0x00b8
+                           0000C0   363 _P4_0	=	0x00c0
+                           0000C1   364 _P4_1	=	0x00c1
+                           0000C2   365 _P4_2	=	0x00c2
+                           0000C3   366 _P4_3	=	0x00c3
+                           0000C4   367 _P4_4	=	0x00c4
+                           0000C5   368 _P4_5	=	0x00c5
+                           0000C6   369 _P4_6	=	0x00c6
+                           0000C7   370 _P4_7	=	0x00c7
+                           0000E8   371 _P5_0	=	0x00e8
+                           0000E9   372 _P5_1	=	0x00e9
+                           0000EA   373 _P5_2	=	0x00ea
+                           0000EB   374 _P5_3	=	0x00eb
+                           0000EC   375 _P5_4	=	0x00ec
+                           0000ED   376 _P5_5	=	0x00ed
+                           0000EE   377 _P5_6	=	0x00ee
+                           0000EF   378 _P5_7	=	0x00ef
+                           0000F0   379 _BREG_F0	=	0x00f0
+                           0000F1   380 _BREG_F1	=	0x00f1
+                           0000F2   381 _BREG_F2	=	0x00f2
+                           0000F3   382 _BREG_F3	=	0x00f3
+                           0000F4   383 _BREG_F4	=	0x00f4
+                           0000F5   384 _BREG_F5	=	0x00f5
+                           0000F6   385 _BREG_F6	=	0x00f6
+                           0000F7   386 _BREG_F7	=	0x00f7
+                           0000A8   387 _EX0	=	0x00a8
+                           0000A9   388 _ET0	=	0x00a9
+                           0000AA   389 _EX1	=	0x00aa
+                           0000AB   390 _ET1	=	0x00ab
+                           0000AC   391 _ES	=	0x00ac
+                           0000AF   392 _EA	=	0x00af
+                           0000B8   393 _PX0	=	0x00b8
+                           0000B9   394 _PT0	=	0x00b9
+                           0000BA   395 _PX1	=	0x00ba
+                           0000BB   396 _PT1	=	0x00bb
+                           0000BC   397 _PS	=	0x00bc
+                           000080   398 _P0_0	=	0x0080
+                           000081   399 _P0_1	=	0x0081
+                           000082   400 _P0_2	=	0x0082
+                           000083   401 _P0_3	=	0x0083
+                           000084   402 _P0_4	=	0x0084
+                           000085   403 _P0_5	=	0x0085
+                           000086   404 _P0_6	=	0x0086
+                           000087   405 _P0_7	=	0x0087
+                           000090   406 _P1_0	=	0x0090
+                           000091   407 _P1_1	=	0x0091
+                           000092   408 _P1_2	=	0x0092
+                           000093   409 _P1_3	=	0x0093
+                           000094   410 _P1_4	=	0x0094
+                           000095   411 _P1_5	=	0x0095
+                           000096   412 _P1_6	=	0x0096
+                           000097   413 _P1_7	=	0x0097
+                           0000A0   414 _P2_0	=	0x00a0
+                           0000A1   415 _P2_1	=	0x00a1
+                           0000A2   416 _P2_2	=	0x00a2
+                           0000A3   417 _P2_3	=	0x00a3
+                           0000A4   418 _P2_4	=	0x00a4
+                           0000A5   419 _P2_5	=	0x00a5
+                           0000A6   420 _P2_6	=	0x00a6
+                           0000A7   421 _P2_7	=	0x00a7
+                           0000B0   422 _P3_0	=	0x00b0
+                           0000B1   423 _P3_1	=	0x00b1
+                           0000B2   424 _P3_2	=	0x00b2
+                           0000B3   425 _P3_3	=	0x00b3
+                           0000B4   426 _P3_4	=	0x00b4
+                           0000B5   427 _P3_5	=	0x00b5
+                           0000B6   428 _P3_6	=	0x00b6
+                           0000B7   429 _P3_7	=	0x00b7
+                           0000B0   430 _RXD	=	0x00b0
+                           0000B0   431 _RXD0	=	0x00b0
+                           0000B1   432 _TXD	=	0x00b1
+                           0000B1   433 _TXD0	=	0x00b1
+                           0000B2   434 _INT0	=	0x00b2
+                           0000B3   435 _INT1	=	0x00b3
+                           0000B4   436 _T0	=	0x00b4
+                           0000B5   437 _T1	=	0x00b5
+                           0000B6   438 _WR	=	0x00b6
+                           0000B7   439 _RD	=	0x00b7
+                           0000D0   440 _P	=	0x00d0
+                           0000D1   441 _F1	=	0x00d1
+                           0000D2   442 _OV	=	0x00d2
+                           0000D3   443 _RS0	=	0x00d3
+                           0000D4   444 _RS1	=	0x00d4
+                           0000D5   445 _F0	=	0x00d5
+                           0000D6   446 _AC	=	0x00d6
+                           0000D7   447 _CY	=	0x00d7
+                           000098   448 _RI	=	0x0098
+                           000099   449 _TI	=	0x0099
+                           00009A   450 _RB8	=	0x009a
+                           00009B   451 _TB8	=	0x009b
+                           00009C   452 _REN	=	0x009c
+                           00009D   453 _SM2	=	0x009d
+                           00009E   454 _SM1	=	0x009e
+                           00009F   455 _SM0	=	0x009f
+                           000088   456 _IT0	=	0x0088
+                           000089   457 _IE0	=	0x0089
+                           00008A   458 _IT1	=	0x008a
+                           00008B   459 _IE1	=	0x008b
+                           00008C   460 _TR0	=	0x008c
+                           00008D   461 _TF0	=	0x008d
+                           00008E   462 _TR1	=	0x008e
+                           00008F   463 _TF1	=	0x008f
+                                    464 ;--------------------------------------------------------
+                                    465 ; overlayable register banks
+                                    466 ;--------------------------------------------------------
+                                    467 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        468 	.ds 8
+                                    469 ;--------------------------------------------------------
+                                    470 ; internal ram data
+                                    471 ;--------------------------------------------------------
+                                    472 	.area DSEG    (DATA)
+                                    473 ;--------------------------------------------------------
+                                    474 ; overlayable items in internal ram 
+                                    475 ;--------------------------------------------------------
+                                    476 	.area	OSEG    (OVR,DATA)
+      000000                        477 _gameDecision_sloc0_1_0:
+      000000                        478 	.ds 2
+      000002                        479 _gameDecision_sloc1_1_0:
+      000002                        480 	.ds 1
+      000003                        481 _gameDecision_sloc2_1_0:
+      000003                        482 	.ds 1
+                                    483 ;--------------------------------------------------------
+                                    484 ; indirectly addressable internal ram data
+                                    485 ;--------------------------------------------------------
+                                    486 	.area ISEG    (DATA)
+                                    487 ;--------------------------------------------------------
+                                    488 ; absolute internal ram data
+                                    489 ;--------------------------------------------------------
+                                    490 	.area IABS    (ABS,DATA)
+                                    491 	.area IABS    (ABS,DATA)
+                                    492 ;--------------------------------------------------------
+                                    493 ; bit data
+                                    494 ;--------------------------------------------------------
+                                    495 	.area BSEG    (BIT)
+                                    496 ;--------------------------------------------------------
+                                    497 ; paged external ram data
+                                    498 ;--------------------------------------------------------
+                                    499 	.area PSEG    (PAG,XDATA)
+                                    500 ;--------------------------------------------------------
+                                    501 ; external ram data
+                                    502 ;--------------------------------------------------------
+                                    503 	.area XSEG    (XDATA)
+      000000                        504 _M::
+      000000                        505 	.ds 9
+      000009                        506 _currentPos::
+      000009                        507 	.ds 1
+      00000A                        508 _currentIndex::
+      00000A                        509 	.ds 1
+      00000B                        510 _currentPlayer::
+      00000B                        511 	.ds 2
+      00000D                        512 _gameDecision_decision_65536_91:
+      00000D                        513 	.ds 2
+      00000F                        514 _gameOver_player_65536_107:
+      00000F                        515 	.ds 2
+                                    516 ;--------------------------------------------------------
+                                    517 ; absolute external ram data
+                                    518 ;--------------------------------------------------------
+                                    519 	.area XABS    (ABS,XDATA)
+                                    520 ;--------------------------------------------------------
+                                    521 ; external initialized ram data
+                                    522 ;--------------------------------------------------------
+                                    523 	.area XISEG   (XDATA)
+      000000                        524 _square::
+      000000                        525 	.ds 32
+      000020                        526 _squareWX::
+      000020                        527 	.ds 32
+      000040                        528 _squareWO::
+      000040                        529 	.ds 32
+                                    530 	.area HOME    (CODE)
+                                    531 	.area GSINIT0 (CODE)
+                                    532 	.area GSINIT1 (CODE)
+                                    533 	.area GSINIT2 (CODE)
+                                    534 	.area GSINIT3 (CODE)
+                                    535 	.area GSINIT4 (CODE)
+                                    536 	.area GSINIT5 (CODE)
+                                    537 	.area GSINIT  (CODE)
+                                    538 	.area GSFINAL (CODE)
+                                    539 	.area CSEG    (CODE)
+                                    540 ;--------------------------------------------------------
+                                    541 ; global & static initialisations
+                                    542 ;--------------------------------------------------------
+                                    543 	.area HOME    (CODE)
+                                    544 	.area GSINIT  (CODE)
+                                    545 	.area GSFINAL (CODE)
+                                    546 	.area GSINIT  (CODE)
+                                    547 ;--------------------------------------------------------
+                                    548 ; Home
+                                    549 ;--------------------------------------------------------
+                                    550 	.area HOME    (CODE)
+                                    551 	.area HOME    (CODE)
+                                    552 ;--------------------------------------------------------
+                                    553 ; code
+                                    554 ;--------------------------------------------------------
+                                    555 	.area CSEG    (CODE)
+                                    556 ;------------------------------------------------------------
+                                    557 ;Allocation info for local variables in function 'ccSquare'
+                                    558 ;------------------------------------------------------------
+                                    559 ;rows                      Allocated with name '_ccSquare_rows_65536_53'
+                                    560 ;i                         Allocated with name '_ccSquare_i_131072_54'
+                                    561 ;------------------------------------------------------------
+                                    562 ;	ttt.c:21: void ccSquare(void)
+                                    563 ;	-----------------------------------------
+                                    564 ;	 function ccSquare
+                                    565 ;	-----------------------------------------
+      000000                        566 _ccSquare:
+                           000007   567 	ar7 = 0x07
+                           000006   568 	ar6 = 0x06
+                           000005   569 	ar5 = 0x05
+                           000004   570 	ar4 = 0x04
+                           000003   571 	ar3 = 0x03
+                           000002   572 	ar2 = 0x02
+                           000001   573 	ar1 = 0x01
+                           000000   574 	ar0 = 0x00
+                                    575 ;	ttt.c:23: uint16_t *rows =square;
+                                    576 ;	ttt.c:24: lcd_cmd(0x02);
+      000000 75 82 02         [24]  577 	mov	dpl,#0x02
+      000003 12r00r00         [24]  578 	lcall	_lcd_cmd
+                                    579 ;	ttt.c:25: lcd_cmd(0x40|0x00);
+      000006 75 82 40         [24]  580 	mov	dpl,#0x40
+      000009 12r00r00         [24]  581 	lcall	_lcd_cmd
+                                    582 ;	ttt.c:26: for(int i=0;i<16;i++){
+      00000C 7Dr00            [12]  583 	mov	r5,#_square
+      00000E 7Es00            [12]  584 	mov	r6,#(_square >> 8)
+      000010 7F 00            [12]  585 	mov	r7,#0x00
+      000012 7B 00            [12]  586 	mov	r3,#0x00
+      000014 7C 00            [12]  587 	mov	r4,#0x00
+      000016                        588 00103$:
+      000016 C3               [12]  589 	clr	c
+      000017 EB               [12]  590 	mov	a,r3
+      000018 94 10            [12]  591 	subb	a,#0x10
+      00001A EC               [12]  592 	mov	a,r4
+      00001B 64 80            [12]  593 	xrl	a,#0x80
+      00001D 94 80            [12]  594 	subb	a,#0x80
+      00001F 50 5D            [24]  595 	jnc	00105$
+                                    596 ;	ttt.c:27: lcd_data((*rows>>8)& 0xFF);
+      000021 8D 82            [24]  597 	mov	dpl,r5
+      000023 8E 83            [24]  598 	mov	dph,r6
+      000025 8F F0            [24]  599 	mov	b,r7
+      000027 12r00r00         [24]  600 	lcall	__gptrget
+      00002A A3               [24]  601 	inc	dptr
+      00002B 12r00r00         [24]  602 	lcall	__gptrget
+      00002E F5 82            [12]  603 	mov	dpl,a
+      000030 C0 07            [24]  604 	push	ar7
+      000032 C0 06            [24]  605 	push	ar6
+      000034 C0 05            [24]  606 	push	ar5
+      000036 C0 04            [24]  607 	push	ar4
+      000038 C0 03            [24]  608 	push	ar3
+      00003A 12r00r00         [24]  609 	lcall	_lcd_data
+      00003D D0 03            [24]  610 	pop	ar3
+      00003F D0 04            [24]  611 	pop	ar4
+      000041 D0 05            [24]  612 	pop	ar5
+      000043 D0 06            [24]  613 	pop	ar6
+      000045 D0 07            [24]  614 	pop	ar7
+                                    615 ;	ttt.c:28: lcd_data((*rows++) & 0xFF);
+      000047 8D 82            [24]  616 	mov	dpl,r5
+      000049 8E 83            [24]  617 	mov	dph,r6
+      00004B 8F F0            [24]  618 	mov	b,r7
+      00004D 12r00r00         [24]  619 	lcall	__gptrget
+      000050 FA               [12]  620 	mov	r2,a
+      000051 74 02            [12]  621 	mov	a,#0x02
+      000053 2D               [12]  622 	add	a,r5
+      000054 FD               [12]  623 	mov	r5,a
+      000055 E4               [12]  624 	clr	a
+      000056 3E               [12]  625 	addc	a,r6
+      000057 FE               [12]  626 	mov	r6,a
+      000058 8A 82            [24]  627 	mov	dpl,r2
+      00005A C0 07            [24]  628 	push	ar7
+      00005C C0 06            [24]  629 	push	ar6
+      00005E C0 05            [24]  630 	push	ar5
+      000060 C0 04            [24]  631 	push	ar4
+      000062 C0 03            [24]  632 	push	ar3
+      000064 12r00r00         [24]  633 	lcall	_lcd_data
+                                    634 ;	ttt.c:29: delay(1);
+      000067 90 00 01         [24]  635 	mov	dptr,#0x0001
+      00006A 12r00r00         [24]  636 	lcall	_delay
+      00006D D0 03            [24]  637 	pop	ar3
+      00006F D0 04            [24]  638 	pop	ar4
+      000071 D0 05            [24]  639 	pop	ar5
+      000073 D0 06            [24]  640 	pop	ar6
+      000075 D0 07            [24]  641 	pop	ar7
+                                    642 ;	ttt.c:26: for(int i=0;i<16;i++){
+      000077 0B               [12]  643 	inc	r3
+      000078 BB 00 9B         [24]  644 	cjne	r3,#0x00,00103$
+      00007B 0C               [12]  645 	inc	r4
+      00007C 80 98            [24]  646 	sjmp	00103$
+      00007E                        647 00105$:
+                                    648 ;	ttt.c:31: }
+      00007E 22               [24]  649 	ret
+                                    650 ;------------------------------------------------------------
+                                    651 ;Allocation info for local variables in function 'ccSWX'
+                                    652 ;------------------------------------------------------------
+                                    653 ;rows                      Allocated with name '_ccSWX_rows_65536_57'
+                                    654 ;i                         Allocated with name '_ccSWX_i_131072_58'
+                                    655 ;------------------------------------------------------------
+                                    656 ;	ttt.c:33: void ccSWX(void)
+                                    657 ;	-----------------------------------------
+                                    658 ;	 function ccSWX
+                                    659 ;	-----------------------------------------
+      00007F                        660 _ccSWX:
+                                    661 ;	ttt.c:35: uint16_t *rows =squareWX;
+                                    662 ;	ttt.c:36: lcd_cmd(0x02);
+      00007F 75 82 02         [24]  663 	mov	dpl,#0x02
+      000082 12r00r00         [24]  664 	lcall	_lcd_cmd
+                                    665 ;	ttt.c:37: lcd_cmd(0x40|0x10);
+      000085 75 82 50         [24]  666 	mov	dpl,#0x50
+      000088 12r00r00         [24]  667 	lcall	_lcd_cmd
+                                    668 ;	ttt.c:38: for(int i=0;i<16;i++){
+      00008B 7Dr20            [12]  669 	mov	r5,#_squareWX
+      00008D 7Es00            [12]  670 	mov	r6,#(_squareWX >> 8)
+      00008F 7F 00            [12]  671 	mov	r7,#0x00
+      000091 7B 00            [12]  672 	mov	r3,#0x00
+      000093 7C 00            [12]  673 	mov	r4,#0x00
+      000095                        674 00103$:
+      000095 C3               [12]  675 	clr	c
+      000096 EB               [12]  676 	mov	a,r3
+      000097 94 10            [12]  677 	subb	a,#0x10
+      000099 EC               [12]  678 	mov	a,r4
+      00009A 64 80            [12]  679 	xrl	a,#0x80
+      00009C 94 80            [12]  680 	subb	a,#0x80
+      00009E 50 5D            [24]  681 	jnc	00105$
+                                    682 ;	ttt.c:39: lcd_data((*rows>>8)& 0xFF);
+      0000A0 8D 82            [24]  683 	mov	dpl,r5
+      0000A2 8E 83            [24]  684 	mov	dph,r6
+      0000A4 8F F0            [24]  685 	mov	b,r7
+      0000A6 12r00r00         [24]  686 	lcall	__gptrget
+      0000A9 A3               [24]  687 	inc	dptr
+      0000AA 12r00r00         [24]  688 	lcall	__gptrget
+      0000AD F5 82            [12]  689 	mov	dpl,a
+      0000AF C0 07            [24]  690 	push	ar7
+      0000B1 C0 06            [24]  691 	push	ar6
+      0000B3 C0 05            [24]  692 	push	ar5
+      0000B5 C0 04            [24]  693 	push	ar4
+      0000B7 C0 03            [24]  694 	push	ar3
+      0000B9 12r00r00         [24]  695 	lcall	_lcd_data
+      0000BC D0 03            [24]  696 	pop	ar3
+      0000BE D0 04            [24]  697 	pop	ar4
+      0000C0 D0 05            [24]  698 	pop	ar5
+      0000C2 D0 06            [24]  699 	pop	ar6
+      0000C4 D0 07            [24]  700 	pop	ar7
+                                    701 ;	ttt.c:40: lcd_data((*rows++) & 0xFF);
+      0000C6 8D 82            [24]  702 	mov	dpl,r5
+      0000C8 8E 83            [24]  703 	mov	dph,r6
+      0000CA 8F F0            [24]  704 	mov	b,r7
+      0000CC 12r00r00         [24]  705 	lcall	__gptrget
+      0000CF FA               [12]  706 	mov	r2,a
+      0000D0 74 02            [12]  707 	mov	a,#0x02
+      0000D2 2D               [12]  708 	add	a,r5
+      0000D3 FD               [12]  709 	mov	r5,a
+      0000D4 E4               [12]  710 	clr	a
+      0000D5 3E               [12]  711 	addc	a,r6
+      0000D6 FE               [12]  712 	mov	r6,a
+      0000D7 8A 82            [24]  713 	mov	dpl,r2
+      0000D9 C0 07            [24]  714 	push	ar7
+      0000DB C0 06            [24]  715 	push	ar6
+      0000DD C0 05            [24]  716 	push	ar5
+      0000DF C0 04            [24]  717 	push	ar4
+      0000E1 C0 03            [24]  718 	push	ar3
+      0000E3 12r00r00         [24]  719 	lcall	_lcd_data
+                                    720 ;	ttt.c:41: delay(1);
+      0000E6 90 00 01         [24]  721 	mov	dptr,#0x0001
+      0000E9 12r00r00         [24]  722 	lcall	_delay
+      0000EC D0 03            [24]  723 	pop	ar3
+      0000EE D0 04            [24]  724 	pop	ar4
+      0000F0 D0 05            [24]  725 	pop	ar5
+      0000F2 D0 06            [24]  726 	pop	ar6
+      0000F4 D0 07            [24]  727 	pop	ar7
+                                    728 ;	ttt.c:38: for(int i=0;i<16;i++){
+      0000F6 0B               [12]  729 	inc	r3
+      0000F7 BB 00 9B         [24]  730 	cjne	r3,#0x00,00103$
+      0000FA 0C               [12]  731 	inc	r4
+      0000FB 80 98            [24]  732 	sjmp	00103$
+      0000FD                        733 00105$:
+                                    734 ;	ttt.c:43: }
+      0000FD 22               [24]  735 	ret
+                                    736 ;------------------------------------------------------------
+                                    737 ;Allocation info for local variables in function 'ccSWO'
+                                    738 ;------------------------------------------------------------
+                                    739 ;rows                      Allocated with name '_ccSWO_rows_65536_61'
+                                    740 ;i                         Allocated with name '_ccSWO_i_131072_62'
+                                    741 ;------------------------------------------------------------
+                                    742 ;	ttt.c:45: void ccSWO(void)
+                                    743 ;	-----------------------------------------
+                                    744 ;	 function ccSWO
+                                    745 ;	-----------------------------------------
+      0000FE                        746 _ccSWO:
+                                    747 ;	ttt.c:47: uint16_t *rows =squareWO;
+                                    748 ;	ttt.c:48: lcd_cmd(0x02);
+      0000FE 75 82 02         [24]  749 	mov	dpl,#0x02
+      000101 12r00r00         [24]  750 	lcall	_lcd_cmd
+                                    751 ;	ttt.c:49: lcd_cmd(0x40|0x20);
+      000104 75 82 60         [24]  752 	mov	dpl,#0x60
+      000107 12r00r00         [24]  753 	lcall	_lcd_cmd
+                                    754 ;	ttt.c:50: for(int i=0;i<16;i++){
+      00010A 7Dr40            [12]  755 	mov	r5,#_squareWO
+      00010C 7Es00            [12]  756 	mov	r6,#(_squareWO >> 8)
+      00010E 7F 00            [12]  757 	mov	r7,#0x00
+      000110 7B 00            [12]  758 	mov	r3,#0x00
+      000112 7C 00            [12]  759 	mov	r4,#0x00
+      000114                        760 00103$:
+      000114 C3               [12]  761 	clr	c
+      000115 EB               [12]  762 	mov	a,r3
+      000116 94 10            [12]  763 	subb	a,#0x10
+      000118 EC               [12]  764 	mov	a,r4
+      000119 64 80            [12]  765 	xrl	a,#0x80
+      00011B 94 80            [12]  766 	subb	a,#0x80
+      00011D 50 5D            [24]  767 	jnc	00105$
+                                    768 ;	ttt.c:51: lcd_data((*rows>>8)& 0xFF);
+      00011F 8D 82            [24]  769 	mov	dpl,r5
+      000121 8E 83            [24]  770 	mov	dph,r6
+      000123 8F F0            [24]  771 	mov	b,r7
+      000125 12r00r00         [24]  772 	lcall	__gptrget
+      000128 A3               [24]  773 	inc	dptr
+      000129 12r00r00         [24]  774 	lcall	__gptrget
+      00012C F5 82            [12]  775 	mov	dpl,a
+      00012E C0 07            [24]  776 	push	ar7
+      000130 C0 06            [24]  777 	push	ar6
+      000132 C0 05            [24]  778 	push	ar5
+      000134 C0 04            [24]  779 	push	ar4
+      000136 C0 03            [24]  780 	push	ar3
+      000138 12r00r00         [24]  781 	lcall	_lcd_data
+      00013B D0 03            [24]  782 	pop	ar3
+      00013D D0 04            [24]  783 	pop	ar4
+      00013F D0 05            [24]  784 	pop	ar5
+      000141 D0 06            [24]  785 	pop	ar6
+      000143 D0 07            [24]  786 	pop	ar7
+                                    787 ;	ttt.c:52: lcd_data((*rows++) & 0xFF);
+      000145 8D 82            [24]  788 	mov	dpl,r5
+      000147 8E 83            [24]  789 	mov	dph,r6
+      000149 8F F0            [24]  790 	mov	b,r7
+      00014B 12r00r00         [24]  791 	lcall	__gptrget
+      00014E FA               [12]  792 	mov	r2,a
+      00014F 74 02            [12]  793 	mov	a,#0x02
+      000151 2D               [12]  794 	add	a,r5
+      000152 FD               [12]  795 	mov	r5,a
+      000153 E4               [12]  796 	clr	a
+      000154 3E               [12]  797 	addc	a,r6
+      000155 FE               [12]  798 	mov	r6,a
+      000156 8A 82            [24]  799 	mov	dpl,r2
+      000158 C0 07            [24]  800 	push	ar7
+      00015A C0 06            [24]  801 	push	ar6
+      00015C C0 05            [24]  802 	push	ar5
+      00015E C0 04            [24]  803 	push	ar4
+      000160 C0 03            [24]  804 	push	ar3
+      000162 12r00r00         [24]  805 	lcall	_lcd_data
+                                    806 ;	ttt.c:53: delay(1);
+      000165 90 00 01         [24]  807 	mov	dptr,#0x0001
+      000168 12r00r00         [24]  808 	lcall	_delay
+      00016B D0 03            [24]  809 	pop	ar3
+      00016D D0 04            [24]  810 	pop	ar4
+      00016F D0 05            [24]  811 	pop	ar5
+      000171 D0 06            [24]  812 	pop	ar6
+      000173 D0 07            [24]  813 	pop	ar7
+                                    814 ;	ttt.c:50: for(int i=0;i<16;i++){
+      000175 0B               [12]  815 	inc	r3
+      000176 BB 00 9B         [24]  816 	cjne	r3,#0x00,00103$
+      000179 0C               [12]  817 	inc	r4
+      00017A 80 98            [24]  818 	sjmp	00103$
+      00017C                        819 00105$:
+                                    820 ;	ttt.c:55: }
+      00017C 22               [24]  821 	ret
+                                    822 ;------------------------------------------------------------
+                                    823 ;Allocation info for local variables in function 'putX'
+                                    824 ;------------------------------------------------------------
+                                    825 ;	ttt.c:57: void putX(void)
+                                    826 ;	-----------------------------------------
+                                    827 ;	 function putX
+                                    828 ;	-----------------------------------------
+      00017D                        829 _putX:
+                                    830 ;	ttt.c:59: lcd_data(0x00);
+      00017D 75 82 00         [24]  831 	mov	dpl,#0x00
+      000180 12r00r00         [24]  832 	lcall	_lcd_data
+                                    833 ;	ttt.c:60: lcd_data(0x02);
+      000183 75 82 02         [24]  834 	mov	dpl,#0x02
+                                    835 ;	ttt.c:62: }
+      000186 02r00r00         [24]  836 	ljmp	_lcd_data
+                                    837 ;------------------------------------------------------------
+                                    838 ;Allocation info for local variables in function 'putO'
+                                    839 ;------------------------------------------------------------
+                                    840 ;	ttt.c:64: void putO(void)
+                                    841 ;	-----------------------------------------
+                                    842 ;	 function putO
+                                    843 ;	-----------------------------------------
+      000189                        844 _putO:
+                                    845 ;	ttt.c:66: lcd_data(0x00);
+      000189 75 82 00         [24]  846 	mov	dpl,#0x00
+      00018C 12r00r00         [24]  847 	lcall	_lcd_data
+                                    848 ;	ttt.c:67: lcd_data(0x04);
+      00018F 75 82 04         [24]  849 	mov	dpl,#0x04
+                                    850 ;	ttt.c:69: }
+      000192 02r00r00         [24]  851 	ljmp	_lcd_data
+                                    852 ;------------------------------------------------------------
+                                    853 ;Allocation info for local variables in function 'startGame'
+                                    854 ;------------------------------------------------------------
+                                    855 ;command                   Allocated with name '_startGame_command_65536_69'
+                                    856 ;decision                  Allocated with name '_startGame_decision_262145_73'
+                                    857 ;------------------------------------------------------------
+                                    858 ;	ttt.c:71: void startGame(void){
+                                    859 ;	-----------------------------------------
+                                    860 ;	 function startGame
+                                    861 ;	-----------------------------------------
+      000195                        862 _startGame:
+                                    863 ;	ttt.c:76: lcdgotoaddr(0x96);
+      000195 75 82 96         [24]  864 	mov	dpl,#0x96
+      000198 12r00r00         [24]  865 	lcall	_lcdgotoaddr
+                                    866 ;	ttt.c:77: putX();
+      00019B 12r01r7D         [24]  867 	lcall	_putX
+                                    868 ;	ttt.c:78: currentPlayer = 1;
+      00019E 90r00r0B         [24]  869 	mov	dptr,#_currentPlayer
+      0001A1 74 01            [12]  870 	mov	a,#0x01
+      0001A3 F0               [24]  871 	movx	@dptr,a
+      0001A4 E4               [12]  872 	clr	a
+      0001A5 A3               [24]  873 	inc	dptr
+      0001A6 F0               [24]  874 	movx	@dptr,a
+                                    875 ;	ttt.c:79: currentIndex = 4;
+      0001A7 90r00r0A         [24]  876 	mov	dptr,#_currentIndex
+      0001AA 74 04            [12]  877 	mov	a,#0x04
+      0001AC F0               [24]  878 	movx	@dptr,a
+                                    879 ;	ttt.c:80: currentPos = A[4];
+      0001AD 90r00r04         [24]  880 	mov	dptr,#(_A + 0x0004)
+      0001B0 E4               [12]  881 	clr	a
+      0001B1 93               [24]  882 	movc	a,@a+dptr
+      0001B2 FF               [12]  883 	mov	r7,a
+      0001B3 90r00r09         [24]  884 	mov	dptr,#_currentPos
+      0001B6 F0               [24]  885 	movx	@dptr,a
+                                    886 ;	ttt.c:81: lcdgotoaddr(currentPos);
+      0001B7 8F 82            [24]  887 	mov	dpl,r7
+      0001B9 12r00r00         [24]  888 	lcall	_lcdgotoaddr
+                                    889 ;	ttt.c:83: while(1){
+      0001BC                        890 00143$:
+                                    891 ;	ttt.c:87: command = getchar();
+      0001BC 12r00r00         [24]  892 	lcall	_getchar
+      0001BF AE 82            [24]  893 	mov	r6,dpl
+      0001C1 AF 83            [24]  894 	mov	r7,dph
+                                    895 ;	ttt.c:88: switch(command){
+      0001C3 BE 0D 02         [24]  896 	cjne	r6,#0x0d,00231$
+      0001C6 80 16            [24]  897 	sjmp	00101$
+      0001C8                        898 00231$:
+      0001C8 BE 61 02         [24]  899 	cjne	r6,#0x61,00232$
+      0001CB 80 5A            [24]  900 	sjmp	00111$
+      0001CD                        901 00232$:
+      0001CD BE 64 03         [24]  902 	cjne	r6,#0x64,00233$
+      0001D0 02r02rA5         [24]  903 	ljmp	00140$
+      0001D3                        904 00233$:
+      0001D3 BE 73 03         [24]  905 	cjne	r6,#0x73,00234$
+      0001D6 02r02r80         [24]  906 	ljmp	00124$
+      0001D9                        907 00234$:
+                                    908 ;	ttt.c:89: case 0x0d:
+      0001D9 BE 77 E0         [24]  909 	cjne	r6,#0x77,00143$
+      0001DC 80 27            [24]  910 	sjmp	00107$
+      0001DE                        911 00101$:
+                                    912 ;	ttt.c:91: changeState();
+      0001DE 12r03rB5         [24]  913 	lcall	_changeState
+                                    914 ;	ttt.c:92: int decision = gameDecision();
+      0001E1 12r04r42         [24]  915 	lcall	_gameDecision
+      0001E4 AE 82            [24]  916 	mov	r6,dpl
+      0001E6 AF 83            [24]  917 	mov	r7,dph
+                                    918 ;	ttt.c:93: if(decision == 1 || decision == 2 || decision == 9)
+      0001E8 BE 01 05         [24]  919 	cjne	r6,#0x01,00236$
+      0001EB BF 00 02         [24]  920 	cjne	r7,#0x00,00236$
+      0001EE 80 0E            [24]  921 	sjmp	00102$
+      0001F0                        922 00236$:
+      0001F0 BE 02 05         [24]  923 	cjne	r6,#0x02,00237$
+      0001F3 BF 00 02         [24]  924 	cjne	r7,#0x00,00237$
+      0001F6 80 06            [24]  925 	sjmp	00102$
+      0001F8                        926 00237$:
+      0001F8 BE 09 C1         [24]  927 	cjne	r6,#0x09,00143$
+      0001FB BF 00 BE         [24]  928 	cjne	r7,#0x00,00143$
+      0001FE                        929 00102$:
+                                    930 ;	ttt.c:94: gameOver(decision);
+      0001FE 8E 82            [24]  931 	mov	dpl,r6
+      000200 8F 83            [24]  932 	mov	dph,r7
+      000202 12r06rC0         [24]  933 	lcall	_gameOver
+                                    934 ;	ttt.c:99: case 'w':
+      000205                        935 00107$:
+                                    936 ;	ttt.c:101: if((currentIndex<3)){
+      000205 90r00r0A         [24]  937 	mov	dptr,#_currentIndex
+      000208 E0               [24]  938 	movx	a,@dptr
+      000209 FF               [12]  939 	mov	r7,a
+      00020A BF 03 00         [24]  940 	cjne	r7,#0x03,00240$
+      00020D                        941 00240$:
+      00020D 40 AD            [24]  942 	jc	00143$
+                                    943 ;	ttt.c:104: currentIndex-=3;
+      00020F EF               [12]  944 	mov	a,r7
+      000210 24 FD            [12]  945 	add	a,#0xfd
+      000212 90r00r0A         [24]  946 	mov	dptr,#_currentIndex
+      000215 F0               [24]  947 	movx	@dptr,a
+                                    948 ;	ttt.c:105: currentPos=A[currentIndex];
+      000216 E0               [24]  949 	movx	a,@dptr
+      000217 90r00r00         [24]  950 	mov	dptr,#_A
+      00021A 93               [24]  951 	movc	a,@a+dptr
+      00021B FF               [12]  952 	mov	r7,a
+      00021C 90r00r09         [24]  953 	mov	dptr,#_currentPos
+      00021F F0               [24]  954 	movx	@dptr,a
+                                    955 ;	ttt.c:106: lcdgotoaddr(currentPos);
+      000220 8F 82            [24]  956 	mov	dpl,r7
+      000222 12r00r00         [24]  957 	lcall	_lcdgotoaddr
+                                    958 ;	ttt.c:108: break;
+                                    959 ;	ttt.c:111: case 'a':
+      000225 80 95            [24]  960 	sjmp	00143$
+      000227                        961 00111$:
+                                    962 ;	ttt.c:113: if(currentIndex>0 && currentIndex<=2)
+      000227 90r00r0A         [24]  963 	mov	dptr,#_currentIndex
+      00022A E0               [24]  964 	movx	a,@dptr
+      00022B FF               [12]  965 	mov	r7,a
+      00022C 60 0D            [24]  966 	jz	00121$
+      00022E EF               [12]  967 	mov	a,r7
+      00022F 24 FD            [12]  968 	add	a,#0xff - 0x02
+      000231 40 08            [24]  969 	jc	00121$
+                                    970 ;	ttt.c:114: currentIndex-=1;
+      000233 EF               [12]  971 	mov	a,r7
+      000234 14               [12]  972 	dec	a
+      000235 90r00r0A         [24]  973 	mov	dptr,#_currentIndex
+      000238 F0               [24]  974 	movx	@dptr,a
+      000239 80 30            [24]  975 	sjmp	00122$
+      00023B                        976 00121$:
+                                    977 ;	ttt.c:115: else if(currentIndex>3 && currentIndex<=5)
+      00023B 90r00r0A         [24]  978 	mov	dptr,#_currentIndex
+      00023E E0               [24]  979 	movx	a,@dptr
+      00023F FF               [12]  980 	mov  r7,a
+      000240 24 FC            [12]  981 	add	a,#0xff - 0x03
+      000242 50 0D            [24]  982 	jnc	00117$
+      000244 EF               [12]  983 	mov	a,r7
+      000245 24 FA            [12]  984 	add	a,#0xff - 0x05
+      000247 40 08            [24]  985 	jc	00117$
+                                    986 ;	ttt.c:116: currentIndex-=1;
+      000249 EF               [12]  987 	mov	a,r7
+      00024A 14               [12]  988 	dec	a
+      00024B 90r00r0A         [24]  989 	mov	dptr,#_currentIndex
+      00024E F0               [24]  990 	movx	@dptr,a
+      00024F 80 1A            [24]  991 	sjmp	00122$
+      000251                        992 00117$:
+                                    993 ;	ttt.c:117: else if(currentIndex>6 && currentIndex<=8)
+      000251 90r00r0A         [24]  994 	mov	dptr,#_currentIndex
+      000254 E0               [24]  995 	movx	a,@dptr
+      000255 FF               [12]  996 	mov  r7,a
+      000256 24 F9            [12]  997 	add	a,#0xff - 0x06
+      000258 40 03            [24]  998 	jc	00246$
+      00025A 02r01rBC         [24]  999 	ljmp	00143$
+      00025D                       1000 00246$:
+      00025D EF               [12] 1001 	mov	a,r7
+      00025E 24 F7            [12] 1002 	add	a,#0xff - 0x08
+      000260 50 03            [24] 1003 	jnc	00247$
+      000262 02r01rBC         [24] 1004 	ljmp	00143$
+      000265                       1005 00247$:
+                                   1006 ;	ttt.c:118: currentIndex-=1;
+      000265 EF               [12] 1007 	mov	a,r7
+      000266 14               [12] 1008 	dec	a
+      000267 90r00r0A         [24] 1009 	mov	dptr,#_currentIndex
+      00026A F0               [24] 1010 	movx	@dptr,a
+                                   1011 ;	ttt.c:120: break;
+      00026B                       1012 00122$:
+                                   1013 ;	ttt.c:121: currentPos=A[currentIndex];
+      00026B 90r00r0A         [24] 1014 	mov	dptr,#_currentIndex
+      00026E E0               [24] 1015 	movx	a,@dptr
+      00026F 90r00r00         [24] 1016 	mov	dptr,#_A
+      000272 93               [24] 1017 	movc	a,@a+dptr
+      000273 FF               [12] 1018 	mov	r7,a
+      000274 90r00r09         [24] 1019 	mov	dptr,#_currentPos
+      000277 F0               [24] 1020 	movx	@dptr,a
+                                   1021 ;	ttt.c:122: lcdgotoaddr(currentPos);
+      000278 8F 82            [24] 1022 	mov	dpl,r7
+      00027A 12r00r00         [24] 1023 	lcall	_lcdgotoaddr
+                                   1024 ;	ttt.c:123: break;
+      00027D 02r01rBC         [24] 1025 	ljmp	00143$
+                                   1026 ;	ttt.c:126: case 's':
+      000280                       1027 00124$:
+                                   1028 ;	ttt.c:128: if((currentIndex>5)){
+      000280 90r00r0A         [24] 1029 	mov	dptr,#_currentIndex
+      000283 E0               [24] 1030 	movx	a,@dptr
+      000284 FF               [12] 1031 	mov  r7,a
+      000285 24 FA            [12] 1032 	add	a,#0xff - 0x05
+      000287 50 03            [24] 1033 	jnc	00248$
+      000289 02r01rBC         [24] 1034 	ljmp	00143$
+      00028C                       1035 00248$:
+                                   1036 ;	ttt.c:132: currentIndex +=3;
+      00028C 90r00r0A         [24] 1037 	mov	dptr,#_currentIndex
+      00028F 74 03            [12] 1038 	mov	a,#0x03
+      000291 2F               [12] 1039 	add	a,r7
+      000292 F0               [24] 1040 	movx	@dptr,a
+                                   1041 ;	ttt.c:133: currentPos=A[currentIndex];
+      000293 E0               [24] 1042 	movx	a,@dptr
+      000294 90r00r00         [24] 1043 	mov	dptr,#_A
+      000297 93               [24] 1044 	movc	a,@a+dptr
+      000298 FF               [12] 1045 	mov	r7,a
+      000299 90r00r09         [24] 1046 	mov	dptr,#_currentPos
+      00029C F0               [24] 1047 	movx	@dptr,a
+                                   1048 ;	ttt.c:134: lcdgotoaddr(currentPos);
+      00029D 8F 82            [24] 1049 	mov	dpl,r7
+      00029F 12r00r00         [24] 1050 	lcall	_lcdgotoaddr
+                                   1051 ;	ttt.c:136: break;
+      0002A2 02r01rBC         [24] 1052 	ljmp	00143$
+                                   1053 ;	ttt.c:141: if(currentIndex>=0 && currentIndex<2)
+      0002A5                       1054 00140$:
+      0002A5 90r00r0A         [24] 1055 	mov	dptr,#_currentIndex
+      0002A8 E0               [24] 1056 	movx	a,@dptr
+      0002A9 FF               [12] 1057 	mov	r7,a
+      0002AA BF 02 00         [24] 1058 	cjne	r7,#0x02,00249$
+      0002AD                       1059 00249$:
+      0002AD 50 0A            [24] 1060 	jnc	00138$
+                                   1061 ;	ttt.c:142: currentIndex+=1;
+      0002AF 8F 06            [24] 1062 	mov	ar6,r7
+      0002B1 90r00r0A         [24] 1063 	mov	dptr,#_currentIndex
+      0002B4 EE               [12] 1064 	mov	a,r6
+      0002B5 04               [12] 1065 	inc	a
+      0002B6 F0               [24] 1066 	movx	@dptr,a
+      0002B7 80 2D            [24] 1067 	sjmp	00139$
+      0002B9                       1068 00138$:
+                                   1069 ;	ttt.c:143: else if(currentIndex>=3 && currentIndex<5)
+      0002B9 BF 03 00         [24] 1070 	cjne	r7,#0x03,00251$
+      0002BC                       1071 00251$:
+      0002BC 40 0D            [24] 1072 	jc	00134$
+      0002BE BF 05 00         [24] 1073 	cjne	r7,#0x05,00253$
+      0002C1                       1074 00253$:
+      0002C1 50 08            [24] 1075 	jnc	00134$
+                                   1076 ;	ttt.c:144: currentIndex+=1;
+      0002C3 90r00r0A         [24] 1077 	mov	dptr,#_currentIndex
+      0002C6 EF               [12] 1078 	mov	a,r7
+      0002C7 04               [12] 1079 	inc	a
+      0002C8 F0               [24] 1080 	movx	@dptr,a
+      0002C9 80 1B            [24] 1081 	sjmp	00139$
+      0002CB                       1082 00134$:
+                                   1083 ;	ttt.c:145: else if(currentIndex>=6 && currentIndex<8)
+      0002CB 90r00r0A         [24] 1084 	mov	dptr,#_currentIndex
+      0002CE E0               [24] 1085 	movx	a,@dptr
+      0002CF FF               [12] 1086 	mov	r7,a
+      0002D0 BF 06 00         [24] 1087 	cjne	r7,#0x06,00255$
+      0002D3                       1088 00255$:
+      0002D3 50 03            [24] 1089 	jnc	00256$
+      0002D5 02r01rBC         [24] 1090 	ljmp	00143$
+      0002D8                       1091 00256$:
+      0002D8 BF 08 00         [24] 1092 	cjne	r7,#0x08,00257$
+      0002DB                       1093 00257$:
+      0002DB 40 03            [24] 1094 	jc	00258$
+      0002DD 02r01rBC         [24] 1095 	ljmp	00143$
+      0002E0                       1096 00258$:
+                                   1097 ;	ttt.c:146: currentIndex+=1;
+      0002E0 90r00r0A         [24] 1098 	mov	dptr,#_currentIndex
+      0002E3 EF               [12] 1099 	mov	a,r7
+      0002E4 04               [12] 1100 	inc	a
+      0002E5 F0               [24] 1101 	movx	@dptr,a
+                                   1102 ;	ttt.c:148: break;
+      0002E6                       1103 00139$:
+                                   1104 ;	ttt.c:149: currentPos=A[currentIndex];
+      0002E6 90r00r0A         [24] 1105 	mov	dptr,#_currentIndex
+      0002E9 E0               [24] 1106 	movx	a,@dptr
+      0002EA 90r00r00         [24] 1107 	mov	dptr,#_A
+      0002ED 93               [24] 1108 	movc	a,@a+dptr
+      0002EE FF               [12] 1109 	mov	r7,a
+      0002EF 90r00r09         [24] 1110 	mov	dptr,#_currentPos
+      0002F2 F0               [24] 1111 	movx	@dptr,a
+                                   1112 ;	ttt.c:150: lcdgotoaddr(currentPos);
+      0002F3 8F 82            [24] 1113 	mov	dpl,r7
+      0002F5 12r00r00         [24] 1114 	lcall	_lcdgotoaddr
+                                   1115 ;	ttt.c:154: }//switch
+                                   1116 ;	ttt.c:235: }
+      0002F8 02r01rBC         [24] 1117 	ljmp	00143$
+                                   1118 ;------------------------------------------------------------
+                                   1119 ;Allocation info for local variables in function 'Init_Game'
+                                   1120 ;------------------------------------------------------------
+                                   1121 ;	ttt.c:237: void Init_Game(void)
+                                   1122 ;	-----------------------------------------
+                                   1123 ;	 function Init_Game
+                                   1124 ;	-----------------------------------------
+      0002FB                       1125 _Init_Game:
+                                   1126 ;	ttt.c:239: ccSquare();
+      0002FB 12r00r00         [24] 1127 	lcall	_ccSquare
+                                   1128 ;	ttt.c:240: ccSWO();
+      0002FE 12r00rFE         [24] 1129 	lcall	_ccSWO
+                                   1130 ;	ttt.c:241: ccSWX();
+      000301 12r00r7F         [24] 1131 	lcall	_ccSWX
+                                   1132 ;	ttt.c:243: lcdgotoaddr(0x81);
+      000304 75 82 81         [24] 1133 	mov	dpl,#0x81
+      000307 12r00r00         [24] 1134 	lcall	_lcdgotoaddr
+                                   1135 ;	ttt.c:244: lcdputstr(" TIC-TAC-TOE");
+      00030A 90r00r09         [24] 1136 	mov	dptr,#___str_0
+      00030D 75 F0 80         [24] 1137 	mov	b,#0x80
+      000310 12r00r00         [24] 1138 	lcall	_lcdputstr
+                                   1139 ;	ttt.c:246: lcdgotoaddr(0x92);
+      000313 75 82 92         [24] 1140 	mov	dpl,#0x92
+      000316 12r00r00         [24] 1141 	lcall	_lcdgotoaddr
+                                   1142 ;	ttt.c:247: lcd_data(0x00);
+      000319 75 82 00         [24] 1143 	mov	dpl,#0x00
+      00031C 12r00r00         [24] 1144 	lcall	_lcd_data
+                                   1145 ;	ttt.c:248: lcd_data(0x00);
+      00031F 75 82 00         [24] 1146 	mov	dpl,#0x00
+      000322 12r00r00         [24] 1147 	lcall	_lcd_data
+                                   1148 ;	ttt.c:249: lcdgotoaddr(0x93);
+      000325 75 82 93         [24] 1149 	mov	dpl,#0x93
+      000328 12r00r00         [24] 1150 	lcall	_lcdgotoaddr
+                                   1151 ;	ttt.c:250: lcd_data(0x00);
+      00032B 75 82 00         [24] 1152 	mov	dpl,#0x00
+      00032E 12r00r00         [24] 1153 	lcall	_lcd_data
+                                   1154 ;	ttt.c:251: lcd_data(0x00);
+      000331 75 82 00         [24] 1155 	mov	dpl,#0x00
+      000334 12r00r00         [24] 1156 	lcall	_lcd_data
+                                   1157 ;	ttt.c:252: lcdgotoaddr(0x94);
+      000337 75 82 94         [24] 1158 	mov	dpl,#0x94
+      00033A 12r00r00         [24] 1159 	lcall	_lcdgotoaddr
+                                   1160 ;	ttt.c:253: lcd_data(0x00);
+      00033D 75 82 00         [24] 1161 	mov	dpl,#0x00
+      000340 12r00r00         [24] 1162 	lcall	_lcd_data
+                                   1163 ;	ttt.c:254: lcd_data(0x00);
+      000343 75 82 00         [24] 1164 	mov	dpl,#0x00
+      000346 12r00r00         [24] 1165 	lcall	_lcd_data
+                                   1166 ;	ttt.c:256: lcdgotoaddr(0x8A);
+      000349 75 82 8A         [24] 1167 	mov	dpl,#0x8a
+      00034C 12r00r00         [24] 1168 	lcall	_lcdgotoaddr
+                                   1169 ;	ttt.c:257: lcd_data(0x00);
+      00034F 75 82 00         [24] 1170 	mov	dpl,#0x00
+      000352 12r00r00         [24] 1171 	lcall	_lcd_data
+                                   1172 ;	ttt.c:258: lcd_data(0x00);
+      000355 75 82 00         [24] 1173 	mov	dpl,#0x00
+      000358 12r00r00         [24] 1174 	lcall	_lcd_data
+                                   1175 ;	ttt.c:259: lcdgotoaddr(0x8B);
+      00035B 75 82 8B         [24] 1176 	mov	dpl,#0x8b
+      00035E 12r00r00         [24] 1177 	lcall	_lcdgotoaddr
+                                   1178 ;	ttt.c:260: lcd_data(0x00);
+      000361 75 82 00         [24] 1179 	mov	dpl,#0x00
+      000364 12r00r00         [24] 1180 	lcall	_lcd_data
+                                   1181 ;	ttt.c:261: lcd_data(0x00);
+      000367 75 82 00         [24] 1182 	mov	dpl,#0x00
+      00036A 12r00r00         [24] 1183 	lcall	_lcd_data
+                                   1184 ;	ttt.c:262: lcdgotoaddr(0x8C);
+      00036D 75 82 8C         [24] 1185 	mov	dpl,#0x8c
+      000370 12r00r00         [24] 1186 	lcall	_lcdgotoaddr
+                                   1187 ;	ttt.c:263: lcd_data(0x00);
+      000373 75 82 00         [24] 1188 	mov	dpl,#0x00
+      000376 12r00r00         [24] 1189 	lcall	_lcd_data
+                                   1190 ;	ttt.c:264: lcd_data(0x00);
+      000379 75 82 00         [24] 1191 	mov	dpl,#0x00
+      00037C 12r00r00         [24] 1192 	lcall	_lcd_data
+                                   1193 ;	ttt.c:266: lcdgotoaddr(0x9A);
+      00037F 75 82 9A         [24] 1194 	mov	dpl,#0x9a
+      000382 12r00r00         [24] 1195 	lcall	_lcdgotoaddr
+                                   1196 ;	ttt.c:267: lcd_data(0x00);
+      000385 75 82 00         [24] 1197 	mov	dpl,#0x00
+      000388 12r00r00         [24] 1198 	lcall	_lcd_data
+                                   1199 ;	ttt.c:268: lcd_data(0x00);
+      00038B 75 82 00         [24] 1200 	mov	dpl,#0x00
+      00038E 12r00r00         [24] 1201 	lcall	_lcd_data
+                                   1202 ;	ttt.c:269: lcdgotoaddr(0x9B);
+      000391 75 82 9B         [24] 1203 	mov	dpl,#0x9b
+      000394 12r00r00         [24] 1204 	lcall	_lcdgotoaddr
+                                   1205 ;	ttt.c:270: lcd_data(0x00);
+      000397 75 82 00         [24] 1206 	mov	dpl,#0x00
+      00039A 12r00r00         [24] 1207 	lcall	_lcd_data
+                                   1208 ;	ttt.c:271: lcd_data(0x00);
+      00039D 75 82 00         [24] 1209 	mov	dpl,#0x00
+      0003A0 12r00r00         [24] 1210 	lcall	_lcd_data
+                                   1211 ;	ttt.c:272: lcdgotoaddr(0x9C);
+      0003A3 75 82 9C         [24] 1212 	mov	dpl,#0x9c
+      0003A6 12r00r00         [24] 1213 	lcall	_lcdgotoaddr
+                                   1214 ;	ttt.c:273: lcd_data(0x00);
+      0003A9 75 82 00         [24] 1215 	mov	dpl,#0x00
+      0003AC 12r00r00         [24] 1216 	lcall	_lcd_data
+                                   1217 ;	ttt.c:274: lcd_data(0x00);
+      0003AF 75 82 00         [24] 1218 	mov	dpl,#0x00
+                                   1219 ;	ttt.c:275: }
+      0003B2 02r00r00         [24] 1220 	ljmp	_lcd_data
+                                   1221 ;------------------------------------------------------------
+                                   1222 ;Allocation info for local variables in function 'changeState'
+                                   1223 ;------------------------------------------------------------
+                                   1224 ;	ttt.c:278: int changeState(void)
+                                   1225 ;	-----------------------------------------
+                                   1226 ;	 function changeState
+                                   1227 ;	-----------------------------------------
+      0003B5                       1228 _changeState:
+                                   1229 ;	ttt.c:282: if( M[currentIndex] != 0)
+      0003B5 90r00r0A         [24] 1230 	mov	dptr,#_currentIndex
+      0003B8 E0               [24] 1231 	movx	a,@dptr
+      0003B9 24r00            [12] 1232 	add	a,#_M
+      0003BB FF               [12] 1233 	mov	r7,a
+      0003BC E4               [12] 1234 	clr	a
+      0003BD 34s00            [12] 1235 	addc	a,#(_M >> 8)
+      0003BF FE               [12] 1236 	mov	r6,a
+      0003C0 8F 82            [24] 1237 	mov	dpl,r7
+      0003C2 8E 83            [24] 1238 	mov	dph,r6
+      0003C4 E0               [24] 1239 	movx	a,@dptr
+      0003C5 60 04            [24] 1240 	jz	00102$
+                                   1241 ;	ttt.c:283: return -1;
+      0003C7 90 FF FF         [24] 1242 	mov	dptr,#0xffff
+      0003CA 22               [24] 1243 	ret
+      0003CB                       1244 00102$:
+                                   1245 ;	ttt.c:286: if(currentPlayer == 1){
+      0003CB 90r00r0B         [24] 1246 	mov	dptr,#_currentPlayer
+      0003CE E0               [24] 1247 	movx	a,@dptr
+      0003CF FE               [12] 1248 	mov	r6,a
+      0003D0 A3               [24] 1249 	inc	dptr
+      0003D1 E0               [24] 1250 	movx	a,@dptr
+      0003D2 FF               [12] 1251 	mov	r7,a
+      0003D3 BE 01 21         [24] 1252 	cjne	r6,#0x01,00106$
+      0003D6 BF 00 1E         [24] 1253 	cjne	r7,#0x00,00106$
+                                   1254 ;	ttt.c:287: putX();
+      0003D9 12r01r7D         [24] 1255 	lcall	_putX
+                                   1256 ;	ttt.c:288: M[currentIndex] = 1;
+      0003DC 90r00r0A         [24] 1257 	mov	dptr,#_currentIndex
+      0003DF E0               [24] 1258 	movx	a,@dptr
+      0003E0 FD               [12] 1259 	mov	r5,a
+      0003E1 24r00            [12] 1260 	add	a,#_M
+      0003E3 F5 82            [12] 1261 	mov	dpl,a
+      0003E5 E4               [12] 1262 	clr	a
+      0003E6 34s00            [12] 1263 	addc	a,#(_M >> 8)
+      0003E8 F5 83            [12] 1264 	mov	dph,a
+      0003EA 74 01            [12] 1265 	mov	a,#0x01
+      0003EC F0               [24] 1266 	movx	@dptr,a
+                                   1267 ;	ttt.c:289: currentPlayer = 2;
+      0003ED 90r00r0B         [24] 1268 	mov	dptr,#_currentPlayer
+      0003F0 04               [12] 1269 	inc	a
+      0003F1 F0               [24] 1270 	movx	@dptr,a
+      0003F2 E4               [12] 1271 	clr	a
+      0003F3 A3               [24] 1272 	inc	dptr
+      0003F4 F0               [24] 1273 	movx	@dptr,a
+      0003F5 80 22            [24] 1274 	sjmp	00107$
+      0003F7                       1275 00106$:
+                                   1276 ;	ttt.c:291: else if (currentPlayer == 2){
+      0003F7 BE 02 1F         [24] 1277 	cjne	r6,#0x02,00107$
+      0003FA BF 00 1C         [24] 1278 	cjne	r7,#0x00,00107$
+                                   1279 ;	ttt.c:292: putO();
+      0003FD 12r01r89         [24] 1280 	lcall	_putO
+                                   1281 ;	ttt.c:293: M[currentIndex] = 2;
+      000400 90r00r0A         [24] 1282 	mov	dptr,#_currentIndex
+      000403 E0               [24] 1283 	movx	a,@dptr
+      000404 FF               [12] 1284 	mov	r7,a
+      000405 24r00            [12] 1285 	add	a,#_M
+      000407 F5 82            [12] 1286 	mov	dpl,a
+      000409 E4               [12] 1287 	clr	a
+      00040A 34s00            [12] 1288 	addc	a,#(_M >> 8)
+      00040C F5 83            [12] 1289 	mov	dph,a
+      00040E 74 02            [12] 1290 	mov	a,#0x02
+      000410 F0               [24] 1291 	movx	@dptr,a
+                                   1292 ;	ttt.c:294: currentPlayer =1;
+      000411 90r00r0B         [24] 1293 	mov	dptr,#_currentPlayer
+      000414 14               [12] 1294 	dec	a
+      000415 F0               [24] 1295 	movx	@dptr,a
+      000416 E4               [12] 1296 	clr	a
+      000417 A3               [24] 1297 	inc	dptr
+      000418 F0               [24] 1298 	movx	@dptr,a
+      000419                       1299 00107$:
+                                   1300 ;	ttt.c:297: lcdgotoaddr(0x96);
+      000419 75 82 96         [24] 1301 	mov	dpl,#0x96
+      00041C 12r00r00         [24] 1302 	lcall	_lcdgotoaddr
+                                   1303 ;	ttt.c:298: if(currentPlayer == 1){
+      00041F 90r00r0B         [24] 1304 	mov	dptr,#_currentPlayer
+      000422 E0               [24] 1305 	movx	a,@dptr
+      000423 FE               [12] 1306 	mov	r6,a
+      000424 A3               [24] 1307 	inc	dptr
+      000425 E0               [24] 1308 	movx	a,@dptr
+      000426 FF               [12] 1309 	mov	r7,a
+      000427 BE 01 08         [24] 1310 	cjne	r6,#0x01,00109$
+      00042A BF 00 05         [24] 1311 	cjne	r7,#0x00,00109$
+                                   1312 ;	ttt.c:299: putX();
+      00042D 12r01r7D         [24] 1313 	lcall	_putX
+      000430 80 03            [24] 1314 	sjmp	00110$
+      000432                       1315 00109$:
+                                   1316 ;	ttt.c:302: putO();
+      000432 12r01r89         [24] 1317 	lcall	_putO
+      000435                       1318 00110$:
+                                   1319 ;	ttt.c:305: lcdgotoaddr(currentPos);
+      000435 90r00r09         [24] 1320 	mov	dptr,#_currentPos
+      000438 E0               [24] 1321 	movx	a,@dptr
+      000439 F5 82            [12] 1322 	mov	dpl,a
+      00043B 12r00r00         [24] 1323 	lcall	_lcdgotoaddr
+                                   1324 ;	ttt.c:307: return 1;
+      00043E 90 00 01         [24] 1325 	mov	dptr,#0x0001
+                                   1326 ;	ttt.c:308: }
+      000441 22               [24] 1327 	ret
+                                   1328 ;------------------------------------------------------------
+                                   1329 ;Allocation info for local variables in function 'gameDecision'
+                                   1330 ;------------------------------------------------------------
+                                   1331 ;decision                  Allocated with name '_gameDecision_decision_65536_91'
+                                   1332 ;XCount                    Allocated with name '_gameDecision_XCount_65536_91'
+                                   1333 ;OCount                    Allocated with name '_gameDecision_OCount_65536_91'
+                                   1334 ;j                         Allocated with name '_gameDecision_j_131072_92'
+                                   1335 ;i                         Allocated with name '_gameDecision_i_262144_94'
+                                   1336 ;j                         Allocated with name '_gameDecision_j_131072_97'
+                                   1337 ;i                         Allocated with name '_gameDecision_i_262144_99'
+                                   1338 ;i                         Allocated with name '_gameDecision_i_131072_102'
+                                   1339 ;sloc0                     Allocated with name '_gameDecision_sloc0_1_0'
+                                   1340 ;sloc1                     Allocated with name '_gameDecision_sloc1_1_0'
+                                   1341 ;sloc2                     Allocated with name '_gameDecision_sloc2_1_0'
+                                   1342 ;------------------------------------------------------------
+                                   1343 ;	ttt.c:310: int gameDecision(void)
+                                   1344 ;	-----------------------------------------
+                                   1345 ;	 function gameDecision
+                                   1346 ;	-----------------------------------------
+      000442                       1347 _gameDecision:
+                                   1348 ;	ttt.c:317: for(int j=0; j<3; j++){
+      000442 7E 00            [12] 1349 	mov	r6,#0x00
+      000444 7F 00            [12] 1350 	mov	r7,#0x00
+      000446                       1351 00151$:
+      000446 C3               [12] 1352 	clr	c
+      000447 EE               [12] 1353 	mov	a,r6
+      000448 94 03            [12] 1354 	subb	a,#0x03
+      00044A EF               [12] 1355 	mov	a,r7
+      00044B 64 80            [12] 1356 	xrl	a,#0x80
+      00044D 94 80            [12] 1357 	subb	a,#0x80
+      00044F 40 03            [24] 1358 	jc	00279$
+      000451 02r05r19         [24] 1359 	ljmp	00179$
+      000454                       1360 00279$:
+                                   1361 ;	ttt.c:319: for(int i=0; i<3 ; i++){
+      000454 8E 04            [24] 1362 	mov	ar4,r6
+      000456 8F 05            [24] 1363 	mov	ar5,r7
+      000458 E4               [12] 1364 	clr	a
+      000459 FA               [12] 1365 	mov	r2,a
+      00045A FB               [12] 1366 	mov	r3,a
+      00045B F8               [12] 1367 	mov	r0,a
+      00045C F9               [12] 1368 	mov	r1,a
+      00045D F5*00            [12] 1369 	mov	_gameDecision_sloc0_1_0,a
+      00045F F5*01            [12] 1370 	mov	(_gameDecision_sloc0_1_0 + 1),a
+      000461                       1371 00148$:
+      000461 C3               [12] 1372 	clr	c
+      000462 E5*00            [12] 1373 	mov	a,_gameDecision_sloc0_1_0
+      000464 94 03            [12] 1374 	subb	a,#0x03
+      000466 E5*01            [12] 1375 	mov	a,(_gameDecision_sloc0_1_0 + 1)
+      000468 64 80            [12] 1376 	xrl	a,#0x80
+      00046A 94 80            [12] 1377 	subb	a,#0x80
+      00046C 50 6E            [24] 1378 	jnc	00106$
+                                   1379 ;	ttt.c:320: if( (M[j+(i*3)] == 1))
+      00046E C0 02            [24] 1380 	push	ar2
+      000470 C0 03            [24] 1381 	push	ar3
+      000472 8C*02            [24] 1382 	mov	_gameDecision_sloc1_1_0,r4
+      000474 E5*00            [12] 1383 	mov	a,_gameDecision_sloc0_1_0
+      000476 75 F0 03         [24] 1384 	mov	b,#0x03
+      000479 A4               [48] 1385 	mul	ab
+      00047A F5*03            [12] 1386 	mov	_gameDecision_sloc2_1_0,a
+      00047C 25*02            [12] 1387 	add	a,_gameDecision_sloc1_1_0
+      00047E FB               [12] 1388 	mov	r3,a
+      00047F 33               [12] 1389 	rlc	a
+      000480 95 E0            [12] 1390 	subb	a,acc
+      000482 FA               [12] 1391 	mov	r2,a
+      000483 EB               [12] 1392 	mov	a,r3
+      000484 24r00            [12] 1393 	add	a,#_M
+      000486 F5 82            [12] 1394 	mov	dpl,a
+      000488 EA               [12] 1395 	mov	a,r2
+      000489 34s00            [12] 1396 	addc	a,#(_M >> 8)
+      00048B F5 83            [12] 1397 	mov	dph,a
+      00048D E0               [24] 1398 	movx	a,@dptr
+      00048E FB               [12] 1399 	mov	r3,a
+      00048F BB 01 02         [24] 1400 	cjne	r3,#0x01,00281$
+      000492 80 06            [24] 1401 	sjmp	00282$
+      000494                       1402 00281$:
+      000494 D0 03            [24] 1403 	pop	ar3
+      000496 D0 02            [24] 1404 	pop	ar2
+      000498 80 0B            [24] 1405 	sjmp	00104$
+      00049A                       1406 00282$:
+      00049A D0 03            [24] 1407 	pop	ar3
+      00049C D0 02            [24] 1408 	pop	ar2
+                                   1409 ;	ttt.c:321: XCount++;
+      00049E 08               [12] 1410 	inc	r0
+      00049F B8 00 30         [24] 1411 	cjne	r0,#0x00,00149$
+      0004A2 09               [12] 1412 	inc	r1
+      0004A3 80 2D            [24] 1413 	sjmp	00149$
+      0004A5                       1414 00104$:
+                                   1415 ;	ttt.c:322: else if ( (M[j+(i*3)] == 2))
+      0004A5 C0 04            [24] 1416 	push	ar4
+      0004A7 C0 05            [24] 1417 	push	ar5
+      0004A9 E5*03            [12] 1418 	mov	a,_gameDecision_sloc2_1_0
+      0004AB 25*02            [12] 1419 	add	a,_gameDecision_sloc1_1_0
+      0004AD FD               [12] 1420 	mov	r5,a
+      0004AE 33               [12] 1421 	rlc	a
+      0004AF 95 E0            [12] 1422 	subb	a,acc
+      0004B1 FC               [12] 1423 	mov	r4,a
+      0004B2 ED               [12] 1424 	mov	a,r5
+      0004B3 24r00            [12] 1425 	add	a,#_M
+      0004B5 F5 82            [12] 1426 	mov	dpl,a
+      0004B7 EC               [12] 1427 	mov	a,r4
+      0004B8 34s00            [12] 1428 	addc	a,#(_M >> 8)
+      0004BA F5 83            [12] 1429 	mov	dph,a
+      0004BC E0               [24] 1430 	movx	a,@dptr
+      0004BD FD               [12] 1431 	mov	r5,a
+      0004BE BD 02 02         [24] 1432 	cjne	r5,#0x02,00284$
+      0004C1 80 06            [24] 1433 	sjmp	00285$
+      0004C3                       1434 00284$:
+      0004C3 D0 05            [24] 1435 	pop	ar5
+      0004C5 D0 04            [24] 1436 	pop	ar4
+      0004C7 80 09            [24] 1437 	sjmp	00149$
+      0004C9                       1438 00285$:
+      0004C9 D0 05            [24] 1439 	pop	ar5
+      0004CB D0 04            [24] 1440 	pop	ar4
+                                   1441 ;	ttt.c:323: OCount++;
+      0004CD 0A               [12] 1442 	inc	r2
+      0004CE BA 00 01         [24] 1443 	cjne	r2,#0x00,00286$
+      0004D1 0B               [12] 1444 	inc	r3
+      0004D2                       1445 00286$:
+      0004D2                       1446 00149$:
+                                   1447 ;	ttt.c:319: for(int i=0; i<3 ; i++){
+      0004D2 05*00            [12] 1448 	inc	_gameDecision_sloc0_1_0
+      0004D4 E4               [12] 1449 	clr	a
+      0004D5 B5*00 89         [24] 1450 	cjne	a,_gameDecision_sloc0_1_0,00148$
+      0004D8 05*01            [12] 1451 	inc	(_gameDecision_sloc0_1_0 + 1)
+      0004DA 80 85            [24] 1452 	sjmp	00148$
+      0004DC                       1453 00106$:
+                                   1454 ;	ttt.c:325: if(XCount == 3 || OCount == 3){
+      0004DC E4               [12] 1455 	clr	a
+      0004DD B8 03 04         [24] 1456 	cjne	r0,#0x03,00288$
+      0004E0 B9 00 01         [24] 1457 	cjne	r1,#0x00,00288$
+      0004E3 04               [12] 1458 	inc	a
+      0004E4                       1459 00288$:
+      0004E4 FD               [12] 1460 	mov	r5,a
+      0004E5 70 06            [24] 1461 	jnz	00110$
+      0004E7 BA 03 27         [24] 1462 	cjne	r2,#0x03,00152$
+      0004EA BB 00 24         [24] 1463 	cjne	r3,#0x00,00152$
+      0004ED                       1464 00110$:
+                                   1465 ;	ttt.c:326: if(XCount ==3 )
+      0004ED ED               [12] 1466 	mov	a,r5
+      0004EE 60 0B            [24] 1467 	jz	00108$
+                                   1468 ;	ttt.c:327: decision = 1;
+      0004F0 90r00r0D         [24] 1469 	mov	dptr,#_gameDecision_decision_65536_91
+      0004F3 74 01            [12] 1470 	mov	a,#0x01
+      0004F5 F0               [24] 1471 	movx	@dptr,a
+      0004F6 E4               [12] 1472 	clr	a
+      0004F7 A3               [24] 1473 	inc	dptr
+      0004F8 F0               [24] 1474 	movx	@dptr,a
+      0004F9 80 09            [24] 1475 	sjmp	00109$
+      0004FB                       1476 00108$:
+                                   1477 ;	ttt.c:329: decision = 2;
+      0004FB 90r00r0D         [24] 1478 	mov	dptr,#_gameDecision_decision_65536_91
+      0004FE 74 02            [12] 1479 	mov	a,#0x02
+      000500 F0               [24] 1480 	movx	@dptr,a
+      000501 E4               [12] 1481 	clr	a
+      000502 A3               [24] 1482 	inc	dptr
+      000503 F0               [24] 1483 	movx	@dptr,a
+      000504                       1484 00109$:
+                                   1485 ;	ttt.c:330: return decision;
+      000504 90r00r0D         [24] 1486 	mov	dptr,#_gameDecision_decision_65536_91
+      000507 E0               [24] 1487 	movx	a,@dptr
+      000508 FC               [12] 1488 	mov	r4,a
+      000509 A3               [24] 1489 	inc	dptr
+      00050A E0               [24] 1490 	movx	a,@dptr
+      00050B FD               [12] 1491 	mov	r5,a
+      00050C 8C 82            [24] 1492 	mov	dpl,r4
+      00050E 8D 83            [24] 1493 	mov	dph,r5
+      000510 22               [24] 1494 	ret
+      000511                       1495 00152$:
+                                   1496 ;	ttt.c:317: for(int j=0; j<3; j++){
+      000511 0E               [12] 1497 	inc	r6
+      000512 BE 00 01         [24] 1498 	cjne	r6,#0x00,00294$
+      000515 0F               [12] 1499 	inc	r7
+      000516                       1500 00294$:
+      000516 02r04r46         [24] 1501 	ljmp	00151$
+                                   1502 ;	ttt.c:336: for(int j=0; j<3; j++){
+      000519                       1503 00179$:
+      000519 7E 00            [12] 1504 	mov	r6,#0x00
+      00051B 7F 00            [12] 1505 	mov	r7,#0x00
+      00051D                       1506 00157$:
+      00051D C3               [12] 1507 	clr	c
+      00051E EE               [12] 1508 	mov	a,r6
+      00051F 94 03            [12] 1509 	subb	a,#0x03
+      000521 EF               [12] 1510 	mov	a,r7
+      000522 64 80            [12] 1511 	xrl	a,#0x80
+      000524 94 80            [12] 1512 	subb	a,#0x80
+      000526 40 03            [24] 1513 	jc	00295$
+      000528 02r05rF3         [24] 1514 	ljmp	00126$
+      00052B                       1515 00295$:
+                                   1516 ;	ttt.c:338: for(int i=0; i<3 ; i++){
+      00052B 8E 04            [24] 1517 	mov	ar4,r6
+      00052D 8F 05            [24] 1518 	mov	ar5,r7
+      00052F E4               [12] 1519 	clr	a
+      000530 FA               [12] 1520 	mov	r2,a
+      000531 FB               [12] 1521 	mov	r3,a
+      000532 F8               [12] 1522 	mov	r0,a
+      000533 F9               [12] 1523 	mov	r1,a
+      000534 F5*00            [12] 1524 	mov	_gameDecision_sloc0_1_0,a
+      000536 F5*01            [12] 1525 	mov	(_gameDecision_sloc0_1_0 + 1),a
+      000538                       1526 00154$:
+      000538 C3               [12] 1527 	clr	c
+      000539 E5*00            [12] 1528 	mov	a,_gameDecision_sloc0_1_0
+      00053B 94 03            [12] 1529 	subb	a,#0x03
+      00053D E5*01            [12] 1530 	mov	a,(_gameDecision_sloc0_1_0 + 1)
+      00053F 64 80            [12] 1531 	xrl	a,#0x80
+      000541 94 80            [12] 1532 	subb	a,#0x80
+      000543 50 71            [24] 1533 	jnc	00119$
+                                   1534 ;	ttt.c:339: if( (M[(j*3)+i] == 1))
+      000545 C0 02            [24] 1535 	push	ar2
+      000547 C0 03            [24] 1536 	push	ar3
+      000549 8C 03            [24] 1537 	mov	ar3,r4
+      00054B EB               [12] 1538 	mov	a,r3
+      00054C 75 F0 03         [24] 1539 	mov	b,#0x03
+      00054F A4               [48] 1540 	mul	ab
+      000550 F5*03            [12] 1541 	mov	_gameDecision_sloc2_1_0,a
+      000552 E5*00            [12] 1542 	mov	a,_gameDecision_sloc0_1_0
+      000554 F5*02            [12] 1543 	mov	_gameDecision_sloc1_1_0,a
+      000556 25*03            [12] 1544 	add	a,_gameDecision_sloc2_1_0
+      000558 FB               [12] 1545 	mov	r3,a
+      000559 33               [12] 1546 	rlc	a
+      00055A 95 E0            [12] 1547 	subb	a,acc
+      00055C FA               [12] 1548 	mov	r2,a
+      00055D EB               [12] 1549 	mov	a,r3
+      00055E 24r00            [12] 1550 	add	a,#_M
+      000560 F5 82            [12] 1551 	mov	dpl,a
+      000562 EA               [12] 1552 	mov	a,r2
+      000563 34s00            [12] 1553 	addc	a,#(_M >> 8)
+      000565 F5 83            [12] 1554 	mov	dph,a
+      000567 E0               [24] 1555 	movx	a,@dptr
+      000568 FB               [12] 1556 	mov	r3,a
+      000569 BB 01 02         [24] 1557 	cjne	r3,#0x01,00297$
+      00056C 80 06            [24] 1558 	sjmp	00298$
+      00056E                       1559 00297$:
+      00056E D0 03            [24] 1560 	pop	ar3
+      000570 D0 02            [24] 1561 	pop	ar2
+      000572 80 0B            [24] 1562 	sjmp	00117$
+      000574                       1563 00298$:
+      000574 D0 03            [24] 1564 	pop	ar3
+      000576 D0 02            [24] 1565 	pop	ar2
+                                   1566 ;	ttt.c:340: XCount++;
+      000578 08               [12] 1567 	inc	r0
+      000579 B8 00 30         [24] 1568 	cjne	r0,#0x00,00155$
+      00057C 09               [12] 1569 	inc	r1
+      00057D 80 2D            [24] 1570 	sjmp	00155$
+      00057F                       1571 00117$:
+                                   1572 ;	ttt.c:341: else if ( (M[(j*3)+i] == 2))
+      00057F C0 04            [24] 1573 	push	ar4
+      000581 C0 05            [24] 1574 	push	ar5
+      000583 E5*02            [12] 1575 	mov	a,_gameDecision_sloc1_1_0
+      000585 25*03            [12] 1576 	add	a,_gameDecision_sloc2_1_0
+      000587 FD               [12] 1577 	mov	r5,a
+      000588 33               [12] 1578 	rlc	a
+      000589 95 E0            [12] 1579 	subb	a,acc
+      00058B FC               [12] 1580 	mov	r4,a
+      00058C ED               [12] 1581 	mov	a,r5
+      00058D 24r00            [12] 1582 	add	a,#_M
+      00058F F5 82            [12] 1583 	mov	dpl,a
+      000591 EC               [12] 1584 	mov	a,r4
+      000592 34s00            [12] 1585 	addc	a,#(_M >> 8)
+      000594 F5 83            [12] 1586 	mov	dph,a
+      000596 E0               [24] 1587 	movx	a,@dptr
+      000597 FD               [12] 1588 	mov	r5,a
+      000598 BD 02 02         [24] 1589 	cjne	r5,#0x02,00300$
+      00059B 80 06            [24] 1590 	sjmp	00301$
+      00059D                       1591 00300$:
+      00059D D0 05            [24] 1592 	pop	ar5
+      00059F D0 04            [24] 1593 	pop	ar4
+      0005A1 80 09            [24] 1594 	sjmp	00155$
+      0005A3                       1595 00301$:
+      0005A3 D0 05            [24] 1596 	pop	ar5
+      0005A5 D0 04            [24] 1597 	pop	ar4
+                                   1598 ;	ttt.c:342: OCount++;
+      0005A7 0A               [12] 1599 	inc	r2
+      0005A8 BA 00 01         [24] 1600 	cjne	r2,#0x00,00302$
+      0005AB 0B               [12] 1601 	inc	r3
+      0005AC                       1602 00302$:
+      0005AC                       1603 00155$:
+                                   1604 ;	ttt.c:338: for(int i=0; i<3 ; i++){
+      0005AC 05*00            [12] 1605 	inc	_gameDecision_sloc0_1_0
+      0005AE E4               [12] 1606 	clr	a
+      0005AF B5*00 86         [24] 1607 	cjne	a,_gameDecision_sloc0_1_0,00154$
+      0005B2 05*01            [12] 1608 	inc	(_gameDecision_sloc0_1_0 + 1)
+      0005B4 80 82            [24] 1609 	sjmp	00154$
+      0005B6                       1610 00119$:
+                                   1611 ;	ttt.c:344: if(XCount == 3 || OCount == 3){
+      0005B6 E4               [12] 1612 	clr	a
+      0005B7 B8 03 04         [24] 1613 	cjne	r0,#0x03,00304$
+      0005BA B9 00 01         [24] 1614 	cjne	r1,#0x00,00304$
+      0005BD 04               [12] 1615 	inc	a
+      0005BE                       1616 00304$:
+      0005BE FD               [12] 1617 	mov	r5,a
+      0005BF 70 06            [24] 1618 	jnz	00123$
+      0005C1 BA 03 27         [24] 1619 	cjne	r2,#0x03,00158$
+      0005C4 BB 00 24         [24] 1620 	cjne	r3,#0x00,00158$
+      0005C7                       1621 00123$:
+                                   1622 ;	ttt.c:345: if(XCount ==3 )
+      0005C7 ED               [12] 1623 	mov	a,r5
+      0005C8 60 0B            [24] 1624 	jz	00121$
+                                   1625 ;	ttt.c:346: decision = 1;
+      0005CA 90r00r0D         [24] 1626 	mov	dptr,#_gameDecision_decision_65536_91
+      0005CD 74 01            [12] 1627 	mov	a,#0x01
+      0005CF F0               [24] 1628 	movx	@dptr,a
+      0005D0 E4               [12] 1629 	clr	a
+      0005D1 A3               [24] 1630 	inc	dptr
+      0005D2 F0               [24] 1631 	movx	@dptr,a
+      0005D3 80 09            [24] 1632 	sjmp	00122$
+      0005D5                       1633 00121$:
+                                   1634 ;	ttt.c:348: decision = 2;
+      0005D5 90r00r0D         [24] 1635 	mov	dptr,#_gameDecision_decision_65536_91
+      0005D8 74 02            [12] 1636 	mov	a,#0x02
+      0005DA F0               [24] 1637 	movx	@dptr,a
+      0005DB E4               [12] 1638 	clr	a
+      0005DC A3               [24] 1639 	inc	dptr
+      0005DD F0               [24] 1640 	movx	@dptr,a
+      0005DE                       1641 00122$:
+                                   1642 ;	ttt.c:349: return decision;
+      0005DE 90r00r0D         [24] 1643 	mov	dptr,#_gameDecision_decision_65536_91
+      0005E1 E0               [24] 1644 	movx	a,@dptr
+      0005E2 FC               [12] 1645 	mov	r4,a
+      0005E3 A3               [24] 1646 	inc	dptr
+      0005E4 E0               [24] 1647 	movx	a,@dptr
+      0005E5 FD               [12] 1648 	mov	r5,a
+      0005E6 8C 82            [24] 1649 	mov	dpl,r4
+      0005E8 8D 83            [24] 1650 	mov	dph,r5
+      0005EA 22               [24] 1651 	ret
+      0005EB                       1652 00158$:
+                                   1653 ;	ttt.c:336: for(int j=0; j<3; j++){
+      0005EB 0E               [12] 1654 	inc	r6
+      0005EC BE 00 01         [24] 1655 	cjne	r6,#0x00,00310$
+      0005EF 0F               [12] 1656 	inc	r7
+      0005F0                       1657 00310$:
+      0005F0 02r05r1D         [24] 1658 	ljmp	00157$
+      0005F3                       1659 00126$:
+                                   1660 ;	ttt.c:354: if( (M[0]== 1 && M[4]==1 && M[8]==1) || (M[2]==1 && M[4]==1 && M[6]==1) )
+      0005F3 90r00r00         [24] 1661 	mov	dptr,#_M
+      0005F6 E0               [24] 1662 	movx	a,@dptr
+      0005F7 FF               [12] 1663 	mov	r7,a
+      0005F8 BF 01 12         [24] 1664 	cjne	r7,#0x01,00133$
+      0005FB 90r00r04         [24] 1665 	mov	dptr,#(_M + 0x0004)
+      0005FE E0               [24] 1666 	movx	a,@dptr
+      0005FF FE               [12] 1667 	mov	r6,a
+      000600 BE 01 0A         [24] 1668 	cjne	r6,#0x01,00133$
+      000603 90r00r08         [24] 1669 	mov	dptr,#(_M + 0x0008)
+      000606 E0               [24] 1670 	movx	a,@dptr
+      000607 FE               [12] 1671 	mov	r6,a
+      000608 BE 01 02         [24] 1672 	cjne	r6,#0x01,00315$
+      00060B 80 18            [24] 1673 	sjmp	00127$
+      00060D                       1674 00315$:
+      00060D                       1675 00133$:
+      00060D 90r00r02         [24] 1676 	mov	dptr,#(_M + 0x0002)
+      000610 E0               [24] 1677 	movx	a,@dptr
+      000611 FE               [12] 1678 	mov	r6,a
+      000612 BE 01 14         [24] 1679 	cjne	r6,#0x01,00128$
+      000615 90r00r04         [24] 1680 	mov	dptr,#(_M + 0x0004)
+      000618 E0               [24] 1681 	movx	a,@dptr
+      000619 FD               [12] 1682 	mov	r5,a
+      00061A BD 01 0C         [24] 1683 	cjne	r5,#0x01,00128$
+      00061D 90r00r06         [24] 1684 	mov	dptr,#(_M + 0x0006)
+      000620 E0               [24] 1685 	movx	a,@dptr
+      000621 FD               [12] 1686 	mov	r5,a
+      000622 BD 01 04         [24] 1687 	cjne	r5,#0x01,00128$
+      000625                       1688 00127$:
+                                   1689 ;	ttt.c:355: return 1;
+      000625 90 00 01         [24] 1690 	mov	dptr,#0x0001
+      000628 22               [24] 1691 	ret
+      000629                       1692 00128$:
+                                   1693 ;	ttt.c:357: if( (M[0]==2 && M[4]==2 && M[8]==2) || (M[2]==2 && M[4]==2 && M[6]==2) )
+      000629 BF 02 12         [24] 1694 	cjne	r7,#0x02,00140$
+      00062C 90r00r04         [24] 1695 	mov	dptr,#(_M + 0x0004)
+      00062F E0               [24] 1696 	movx	a,@dptr
+      000630 FF               [12] 1697 	mov	r7,a
+      000631 BF 02 0A         [24] 1698 	cjne	r7,#0x02,00140$
+      000634 90r00r08         [24] 1699 	mov	dptr,#(_M + 0x0008)
+      000637 E0               [24] 1700 	movx	a,@dptr
+      000638 FF               [12] 1701 	mov	r7,a
+      000639 BF 02 02         [24] 1702 	cjne	r7,#0x02,00326$
+      00063C 80 13            [24] 1703 	sjmp	00134$
+      00063E                       1704 00326$:
+      00063E                       1705 00140$:
+      00063E BE 02 14         [24] 1706 	cjne	r6,#0x02,00190$
+      000641 90r00r04         [24] 1707 	mov	dptr,#(_M + 0x0004)
+      000644 E0               [24] 1708 	movx	a,@dptr
+      000645 FF               [12] 1709 	mov	r7,a
+      000646 BF 02 0C         [24] 1710 	cjne	r7,#0x02,00190$
+      000649 90r00r06         [24] 1711 	mov	dptr,#(_M + 0x0006)
+      00064C E0               [24] 1712 	movx	a,@dptr
+      00064D FF               [12] 1713 	mov	r7,a
+      00064E BF 02 04         [24] 1714 	cjne	r7,#0x02,00190$
+      000651                       1715 00134$:
+                                   1716 ;	ttt.c:358: return 2;
+      000651 90 00 02         [24] 1717 	mov	dptr,#0x0002
+                                   1718 ;	ttt.c:360: for(int i=0; i<9; i++){
+      000654 22               [24] 1719 	ret
+      000655                       1720 00190$:
+      000655 7E 00            [12] 1721 	mov	r6,#0x00
+      000657 7F 00            [12] 1722 	mov	r7,#0x00
+      000659 7C 00            [12] 1723 	mov	r4,#0x00
+      00065B 7D 00            [12] 1724 	mov	r5,#0x00
+      00065D                       1725 00160$:
+      00065D C3               [12] 1726 	clr	c
+      00065E EC               [12] 1727 	mov	a,r4
+      00065F 94 09            [12] 1728 	subb	a,#0x09
+      000661 ED               [12] 1729 	mov	a,r5
+      000662 64 80            [12] 1730 	xrl	a,#0x80
+      000664 94 80            [12] 1731 	subb	a,#0x80
+      000666 50 1B            [24] 1732 	jnc	00143$
+                                   1733 ;	ttt.c:361: if(M[i]!=0)
+      000668 EC               [12] 1734 	mov	a,r4
+      000669 24r00            [12] 1735 	add	a,#_M
+      00066B FA               [12] 1736 	mov	r2,a
+      00066C ED               [12] 1737 	mov	a,r5
+      00066D 34s00            [12] 1738 	addc	a,#(_M >> 8)
+      00066F FB               [12] 1739 	mov	r3,a
+      000670 8A 82            [24] 1740 	mov	dpl,r2
+      000672 8B 83            [24] 1741 	mov	dph,r3
+      000674 E0               [24] 1742 	movx	a,@dptr
+      000675 60 05            [24] 1743 	jz	00161$
+                                   1744 ;	ttt.c:362: decision++;
+      000677 0E               [12] 1745 	inc	r6
+      000678 BE 00 01         [24] 1746 	cjne	r6,#0x00,00335$
+      00067B 0F               [12] 1747 	inc	r7
+      00067C                       1748 00335$:
+      00067C                       1749 00161$:
+                                   1750 ;	ttt.c:360: for(int i=0; i<9; i++){
+      00067C 0C               [12] 1751 	inc	r4
+      00067D BC 00 DD         [24] 1752 	cjne	r4,#0x00,00160$
+      000680 0D               [12] 1753 	inc	r5
+      000681 80 DA            [24] 1754 	sjmp	00160$
+      000683                       1755 00143$:
+                                   1756 ;	ttt.c:365: if(decision == 9)
+      000683 BE 09 08         [24] 1757 	cjne	r6,#0x09,00145$
+      000686 BF 00 05         [24] 1758 	cjne	r7,#0x00,00145$
+                                   1759 ;	ttt.c:366: return decision;
+      000689 8E 82            [24] 1760 	mov	dpl,r6
+      00068B 8F 83            [24] 1761 	mov	dph,r7
+      00068D 22               [24] 1762 	ret
+      00068E                       1763 00145$:
+                                   1764 ;	ttt.c:368: return 0;
+      00068E 90 00 00         [24] 1765 	mov	dptr,#0x0000
+                                   1766 ;	ttt.c:370: }
+      000691 22               [24] 1767 	ret
+                                   1768 ;------------------------------------------------------------
+                                   1769 ;Allocation info for local variables in function 'restartGame'
+                                   1770 ;------------------------------------------------------------
+                                   1771 ;i                         Allocated with name '_restartGame_i_131072_106'
+                                   1772 ;------------------------------------------------------------
+                                   1773 ;	ttt.c:372: void restartGame(void)
+                                   1774 ;	-----------------------------------------
+                                   1775 ;	 function restartGame
+                                   1776 ;	-----------------------------------------
+      000692                       1777 _restartGame:
+                                   1778 ;	ttt.c:374: lcd_cmd(0x01);
+      000692 75 82 01         [24] 1779 	mov	dpl,#0x01
+      000695 12r00r00         [24] 1780 	lcall	_lcd_cmd
+                                   1781 ;	ttt.c:375: for(int i=0; i<9; i++)
+      000698 7E 00            [12] 1782 	mov	r6,#0x00
+      00069A 7F 00            [12] 1783 	mov	r7,#0x00
+      00069C                       1784 00103$:
+      00069C C3               [12] 1785 	clr	c
+      00069D EE               [12] 1786 	mov	a,r6
+      00069E 94 09            [12] 1787 	subb	a,#0x09
+      0006A0 EF               [12] 1788 	mov	a,r7
+      0006A1 64 80            [12] 1789 	xrl	a,#0x80
+      0006A3 94 80            [12] 1790 	subb	a,#0x80
+      0006A5 50 13            [24] 1791 	jnc	00101$
+                                   1792 ;	ttt.c:376: M[i]=0;
+      0006A7 EE               [12] 1793 	mov	a,r6
+      0006A8 24r00            [12] 1794 	add	a,#_M
+      0006AA F5 82            [12] 1795 	mov	dpl,a
+      0006AC EF               [12] 1796 	mov	a,r7
+      0006AD 34s00            [12] 1797 	addc	a,#(_M >> 8)
+      0006AF F5 83            [12] 1798 	mov	dph,a
+      0006B1 E4               [12] 1799 	clr	a
+      0006B2 F0               [24] 1800 	movx	@dptr,a
+                                   1801 ;	ttt.c:375: for(int i=0; i<9; i++)
+      0006B3 0E               [12] 1802 	inc	r6
+      0006B4 BE 00 E5         [24] 1803 	cjne	r6,#0x00,00103$
+      0006B7 0F               [12] 1804 	inc	r7
+      0006B8 80 E2            [24] 1805 	sjmp	00103$
+      0006BA                       1806 00101$:
+                                   1807 ;	ttt.c:377: Init_Game();
+      0006BA 12r02rFB         [24] 1808 	lcall	_Init_Game
+                                   1809 ;	ttt.c:378: startGame();
+                                   1810 ;	ttt.c:380: }
+      0006BD 02r01r95         [24] 1811 	ljmp	_startGame
+                                   1812 ;------------------------------------------------------------
+                                   1813 ;Allocation info for local variables in function 'gameOver'
+                                   1814 ;------------------------------------------------------------
+                                   1815 ;player                    Allocated with name '_gameOver_player_65536_107'
+                                   1816 ;------------------------------------------------------------
+                                   1817 ;	ttt.c:382: void gameOver(int player)
+                                   1818 ;	-----------------------------------------
+                                   1819 ;	 function gameOver
+                                   1820 ;	-----------------------------------------
+      0006C0                       1821 _gameOver:
+      0006C0 AF 83            [24] 1822 	mov	r7,dph
+      0006C2 E5 82            [12] 1823 	mov	a,dpl
+      0006C4 90r00r0F         [24] 1824 	mov	dptr,#_gameOver_player_65536_107
+      0006C7 F0               [24] 1825 	movx	@dptr,a
+      0006C8 EF               [12] 1826 	mov	a,r7
+      0006C9 A3               [24] 1827 	inc	dptr
+      0006CA F0               [24] 1828 	movx	@dptr,a
+                                   1829 ;	ttt.c:384: lcd_cmd(0x01);
+      0006CB 75 82 01         [24] 1830 	mov	dpl,#0x01
+      0006CE 12r00r00         [24] 1831 	lcall	_lcd_cmd
+                                   1832 ;	ttt.c:385: if(player == 9){
+      0006D1 90r00r0F         [24] 1833 	mov	dptr,#_gameOver_player_65536_107
+      0006D4 E0               [24] 1834 	movx	a,@dptr
+      0006D5 FE               [12] 1835 	mov	r6,a
+      0006D6 A3               [24] 1836 	inc	dptr
+      0006D7 E0               [24] 1837 	movx	a,@dptr
+      0006D8 FF               [12] 1838 	mov	r7,a
+      0006D9 BE 09 14         [24] 1839 	cjne	r6,#0x09,00105$
+      0006DC BF 00 11         [24] 1840 	cjne	r7,#0x00,00105$
+                                   1841 ;	ttt.c:386: lcdgotoaddr(0x90);
+      0006DF 75 82 90         [24] 1842 	mov	dpl,#0x90
+      0006E2 12r00r00         [24] 1843 	lcall	_lcdgotoaddr
+                                   1844 ;	ttt.c:387: lcdputstr(" IT'S A DRAW!! ");
+      0006E5 90r00r16         [24] 1845 	mov	dptr,#___str_1
+      0006E8 75 F0 80         [24] 1846 	mov	b,#0x80
+      0006EB 12r00r00         [24] 1847 	lcall	_lcdputstr
+      0006EE 80 37            [24] 1848 	sjmp	00107$
+      0006F0                       1849 00105$:
+                                   1850 ;	ttt.c:389: lcdgotoaddr(0x92);
+      0006F0 75 82 92         [24] 1851 	mov	dpl,#0x92
+      0006F3 C0 07            [24] 1852 	push	ar7
+      0006F5 C0 06            [24] 1853 	push	ar6
+      0006F7 12r00r00         [24] 1854 	lcall	_lcdgotoaddr
+                                   1855 ;	ttt.c:390: lcdputstr("WINNER!!");
+      0006FA 90r00r26         [24] 1856 	mov	dptr,#___str_2
+      0006FD 75 F0 80         [24] 1857 	mov	b,#0x80
+      000700 12r00r00         [24] 1858 	lcall	_lcdputstr
+                                   1859 ;	ttt.c:391: lcdgotoaddr(0x8A);
+      000703 75 82 8A         [24] 1860 	mov	dpl,#0x8a
+      000706 12r00r00         [24] 1861 	lcall	_lcdgotoaddr
+      000709 D0 06            [24] 1862 	pop	ar6
+      00070B D0 07            [24] 1863 	pop	ar7
+                                   1864 ;	ttt.c:392: if(player ==1)
+      00070D BE 01 0E         [24] 1865 	cjne	r6,#0x01,00102$
+      000710 BF 00 0B         [24] 1866 	cjne	r7,#0x00,00102$
+                                   1867 ;	ttt.c:393: lcdputstr("PLAYER 1");
+      000713 90r00r2F         [24] 1868 	mov	dptr,#___str_3
+      000716 75 F0 80         [24] 1869 	mov	b,#0x80
+      000719 12r00r00         [24] 1870 	lcall	_lcdputstr
+      00071C 80 09            [24] 1871 	sjmp	00107$
+      00071E                       1872 00102$:
+                                   1873 ;	ttt.c:395: lcdputstr("PLAYER 2");
+      00071E 90r00r38         [24] 1874 	mov	dptr,#___str_4
+      000721 75 F0 80         [24] 1875 	mov	b,#0x80
+      000724 12r00r00         [24] 1876 	lcall	_lcdputstr
+                                   1877 ;	ttt.c:398: while(getchar()!= 0x0d);
+      000727                       1878 00107$:
+      000727 12r00r00         [24] 1879 	lcall	_getchar
+      00072A AE 82            [24] 1880 	mov	r6,dpl
+      00072C AF 83            [24] 1881 	mov	r7,dph
+      00072E BE 0D F6         [24] 1882 	cjne	r6,#0x0d,00107$
+      000731 BF 00 F3         [24] 1883 	cjne	r7,#0x00,00107$
+                                   1884 ;	ttt.c:399: restartGame();
+                                   1885 ;	ttt.c:400: }
+      000734 02r06r92         [24] 1886 	ljmp	_restartGame
+                                   1887 	.area CSEG    (CODE)
+                                   1888 	.area CONST   (CODE)
+      000000                       1889 _A:
+      000000 92                    1890 	.db #0x92	; 146
+      000001 93                    1891 	.db #0x93	; 147
+      000002 94                    1892 	.db #0x94	; 148
+      000003 8A                    1893 	.db #0x8a	; 138
+      000004 8B                    1894 	.db #0x8b	; 139
+      000005 8C                    1895 	.db #0x8c	; 140
+      000006 9A                    1896 	.db #0x9a	; 154
+      000007 9B                    1897 	.db #0x9b	; 155
+      000008 9C                    1898 	.db #0x9c	; 156
+                                   1899 	.area CONST   (CODE)
+      000009                       1900 ___str_0:
+      000009 20 54 49 43 2D 54 41  1901 	.ascii " TIC-TAC-TOE"
+             43 2D 54 4F 45
+      000015 00                    1902 	.db 0x00
+                                   1903 	.area CSEG    (CODE)
+                                   1904 	.area CONST   (CODE)
+      000016                       1905 ___str_1:
+      000016 20 49 54 27 53 20 41  1906 	.ascii " IT'S A DRAW!! "
+             20 44 52 41 57 21 21
+             20
+      000025 00                    1907 	.db 0x00
+                                   1908 	.area CSEG    (CODE)
+                                   1909 	.area CONST   (CODE)
+      000026                       1910 ___str_2:
+      000026 57 49 4E 4E 45 52 21  1911 	.ascii "WINNER!!"
+             21
+      00002E 00                    1912 	.db 0x00
+                                   1913 	.area CSEG    (CODE)
+                                   1914 	.area CONST   (CODE)
+      00002F                       1915 ___str_3:
+      00002F 50 4C 41 59 45 52 20  1916 	.ascii "PLAYER 1"
+             31
+      000037 00                    1917 	.db 0x00
+                                   1918 	.area CSEG    (CODE)
+                                   1919 	.area CONST   (CODE)
+      000038                       1920 ___str_4:
+      000038 50 4C 41 59 45 52 20  1921 	.ascii "PLAYER 2"
+             32
+      000040 00                    1922 	.db 0x00
+                                   1923 	.area CSEG    (CODE)
+                                   1924 	.area XINIT   (CODE)
+      000000                       1925 __xinit__square:
+      000000 FF FF                 1926 	.byte #0xff, #0xff	; 65535
+      000002 01 80                 1927 	.byte #0x01, #0x80	; 32769
+      000004 01 80                 1928 	.byte #0x01, #0x80	; 32769
+      000006 01 80                 1929 	.byte #0x01, #0x80	; 32769
+      000008 01 80                 1930 	.byte #0x01, #0x80	; 32769
+      00000A 01 80                 1931 	.byte #0x01, #0x80	; 32769
+      00000C 01 80                 1932 	.byte #0x01, #0x80	; 32769
+      00000E 01 80                 1933 	.byte #0x01, #0x80	; 32769
+      000010 01 80                 1934 	.byte #0x01, #0x80	; 32769
+      000012 01 80                 1935 	.byte #0x01, #0x80	; 32769
+      000014 01 80                 1936 	.byte #0x01, #0x80	; 32769
+      000016 01 80                 1937 	.byte #0x01, #0x80	; 32769
+      000018 01 80                 1938 	.byte #0x01, #0x80	; 32769
+      00001A 01 80                 1939 	.byte #0x01, #0x80	; 32769
+      00001C 01 80                 1940 	.byte #0x01, #0x80	; 32769
+      00001E FF FF                 1941 	.byte #0xff, #0xff	; 65535
+      000020                       1942 __xinit__squareWX:
+      000020 FF FF                 1943 	.byte #0xff, #0xff	; 65535
+      000022 01 80                 1944 	.byte #0x01, #0x80	; 32769
+      000024 05 A0                 1945 	.byte #0x05, #0xa0	; 40965
+      000026 09 90                 1946 	.byte #0x09, #0x90	; 36873
+      000028 11 88                 1947 	.byte #0x11, #0x88	; 34833
+      00002A 21 84                 1948 	.byte #0x21, #0x84	; 33825
+      00002C 41 82                 1949 	.byte #0x41, #0x82	; 33345
+      00002E 81 81                 1950 	.byte #0x81, #0x81	; 33153
+      000030 81 81                 1951 	.byte #0x81, #0x81	; 33153
+      000032 41 82                 1952 	.byte #0x41, #0x82	; 33345
+      000034 21 84                 1953 	.byte #0x21, #0x84	; 33825
+      000036 11 88                 1954 	.byte #0x11, #0x88	; 34833
+      000038 09 90                 1955 	.byte #0x09, #0x90	; 36873
+      00003A 05 A0                 1956 	.byte #0x05, #0xa0	; 40965
+      00003C 01 80                 1957 	.byte #0x01, #0x80	; 32769
+      00003E FF FF                 1958 	.byte #0xff, #0xff	; 65535
+      000040                       1959 __xinit__squareWO:
+      000040 FF FF                 1960 	.byte #0xff, #0xff	; 65535
+      000042 01 80                 1961 	.byte #0x01, #0x80	; 32769
+      000044 E1 87                 1962 	.byte #0xe1, #0x87	; 34785
+      000046 11 88                 1963 	.byte #0x11, #0x88	; 34833
+      000048 09 90                 1964 	.byte #0x09, #0x90	; 36873
+      00004A 05 A0                 1965 	.byte #0x05, #0xa0	; 40965
+      00004C 05 A0                 1966 	.byte #0x05, #0xa0	; 40965
+      00004E 05 A0                 1967 	.byte #0x05, #0xa0	; 40965
+      000050 05 A0                 1968 	.byte #0x05, #0xa0	; 40965
+      000052 05 A0                 1969 	.byte #0x05, #0xa0	; 40965
+      000054 05 A0                 1970 	.byte #0x05, #0xa0	; 40965
+      000056 09 90                 1971 	.byte #0x09, #0x90	; 36873
+      000058 11 88                 1972 	.byte #0x11, #0x88	; 34833
+      00005A E1 87                 1973 	.byte #0xe1, #0x87	; 34785
+      00005C 01 80                 1974 	.byte #0x01, #0x80	; 32769
+      00005E FF FF                 1975 	.byte #0xff, #0xff	; 65535
+                                   1976 	.area CABS    (ABS,CODE)

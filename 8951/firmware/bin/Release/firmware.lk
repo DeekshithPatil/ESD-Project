@@ -1,0 +1,23 @@
+-muwx
+-i bin\Release\firmware.ihx
+-M
+-Y
+-X 0x8000
+-C 0x5000
+-b HOME = 0x2000
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k C:\Program Files\sdcc\lib
+-k C:\Program Files\SDCC\bin\..\lib\large
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+obj\Release\lcd.rel
+obj\Release\main.rel
+obj\Release\timer.rel
+obj\Release\ttt.rel
+obj\Release\uart.rel
+
+-e

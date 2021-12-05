@@ -1,0 +1,63 @@
+# depslib dependency file v1.0
+1638481468 source:d:\cub\fall21\ecen5613-esd\project\firmware\firmware\main.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<8051.h>
+	<mcs51reg.h>
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+	"lcd.h"
+	"uart.h"
+	"ttt.h"
+
+1638356358 source:d:\cub\fall21\ecen5613-esd\project\firmware\firmware\timer.c
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<8051.h>
+	<mcs51reg.h>
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+	"timer.h"
+	"lcd.h"
+
+1638326692 d:\cub\fall21\ecen5613-esd\project\firmware\firmware\timer.h
+
+1638356343 d:\cub\fall21\ecen5613-esd\project\firmware\firmware\lcd.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<8051.h>
+	<mcs51reg.h>
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+
+1638356328 source:d:\cub\fall21\ecen5613-esd\project\firmware\firmware\lcd.c
+	"lcd.h"
+
+1638345116 d:\cub\fall21\ecen5613-esd\project\firmware\firmware\uart.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<8051.h>
+	<mcs51reg.h>
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+
+1638662019 source:d:\cub\fall21\ecen5613-esd\project\firmware\firmware\uart.c
+	"uart.h"
+
+1638481885 d:\cub\fall21\ecen5613-esd\project\firmware\firmware\ttt.h
+	<mcs51/8051.h>
+	<at89c51ed2.h>
+	<8051.h>
+	<mcs51reg.h>
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+	"lcd.h"
+
+1638662027 source:d:\cub\fall21\ecen5613-esd\project\firmware\firmware\ttt.c
+	"ttt.h"
+
