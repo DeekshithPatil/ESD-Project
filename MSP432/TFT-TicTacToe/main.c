@@ -1,7 +1,7 @@
 /*
  * main.c
  * Brief - Application entry point
- * Reference - TI Examples
+ * Reference - TI Examples (https://www.ti.com/tool/MSP-GRLIB#description)
  * Authors -
  *           a. Santhosh, santhosh@colorado.edu
  *           b. Jahnavi Pinnamaneni, jahnavi.pinnamaneni@colorado.edu
