@@ -1,14 +1,26 @@
-
+/*
+ * @file: ttt.c
+ * @description: includes the api's required for the tic-tac-toc gaming control
+ *
+ * Created on : Dec 1, 2021
+ * Authors    : Santhosh
+ * Email      : santhosh@colorado.edu
+ *
+ */
 #include "ttt.h"
 
-//volatile int button_pressed;
+//to check the button interrupt trigger
+volatile int button_pressed;
 
+//Array to  define the game arena
 uint8_t M[9];
 const uint8_t A[]= {0x92,0X93,0X94,0X8A,0X8B,0X8C,0X9A,0X9B,0X9C};
 
+//variable to store current position,Index and player
 uint8_t currentPos,currentIndex;
 int currentPlayer;
 
+//Lookup table to create the custom characters
 uint16_t square[]={0xFFFF,0x8001,0x8001,0x8001,0x8001,0x8001,0x8001,0x8001,
                    0x8001,0x8001,0x8001,0x8001,0x8001,0x8001,0x8001,0xFFFF};
 
@@ -18,6 +30,7 @@ uint16_t squareWX[]={0xFFFF,0x8001,0xA005,0x9009,0x8811,0x8421,0x8241,0x8181,
 uint16_t squareWO[]={0xFFFF,0x8001,0x87E1,0x8811,0x9009,0xA005,0xA005,0xA005,
                    0xA005,0xA005,0xA005,0x9009,0x8811,0x87E1,0x8001,0xFFFF};
 
+//Function to create the custom character sqaure
 void ccSquare(void)
 {
     uint16_t *rows =square;
@@ -30,6 +43,7 @@ void ccSquare(void)
     }
 }
 
+//Function to create the custom character "X"
 void ccSWX(void)
 {
     uint16_t *rows =squareWX;
@@ -42,6 +56,7 @@ void ccSWX(void)
     }
 }
 
+//Function to create the custom character "O"
 void ccSWO(void)
 {
     uint16_t *rows =squareWO;
@@ -54,6 +69,7 @@ void ccSWO(void)
     }
 }
 
+//Function to put X in the current location
 void putX(void)
 {
     lcd_data(0x00);
@@ -61,12 +77,15 @@ void putX(void)
 
 }
 
+//Function to put O in the current location
 void putO(void)
 {
     lcd_data(0x00);
     lcd_data(0x04);
 
 }
+
+//Refer header file for function documentation
 
 void startGame(void){
 
@@ -82,8 +101,9 @@ void startGame(void){
 
     while(1){
 
-
-
+    //Takes input from the keypad via UART
+    //uncomment the below section of the script to take input from the keyboard
+/*
         command = getchar();
         switch(command){
         case 0x0d:
@@ -152,14 +172,13 @@ void startGame(void){
         }//case
 
         }//switch
+*/
 
-/*
-
-
+    //TO get input from buttons
+    if(button_pressed == 0){
+        button_pressed=0;
         command = (P1 & 0xF8);
-    //while(button_pressed == 0);
-      //  button_pressed=0;
-        printf("%x",command);
+
         switch(command){
         case 0x20:
         {
@@ -229,7 +248,7 @@ void startGame(void){
         }//switch
 
         delay(10000);
-*/
+
     }//while
 
 }
@@ -398,10 +417,9 @@ void gameOver(int player)
     while(getchar()!= 0x0d);
     restartGame();
 }
-/*
+
 void ex0_isr(void) __interrupt(1)
 {
     button_pressed=1;
-    //return;
 }
-*/
+

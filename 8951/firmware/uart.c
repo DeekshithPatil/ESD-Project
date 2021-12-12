@@ -1,5 +1,17 @@
+/*
+ * @file: uart.c
+ * @description: includes the api's required for uart
+ *
+ * Created on : Dec 1, 2021
+ * Authors    : Santhosh
+ * Email      : santhosh@colorado.edu
+ *
+ */
+
+//Header
 #include "uart.h"
 
+//Refer the header file for function documentation
 int putchar (int c)
 {
     while (!TI);
@@ -11,9 +23,8 @@ int putchar (int c)
 int getchar (void)
 {
     while (!RI);
-    RI = 0;                         // cleasr RI flag
-    //putchar(SBUF);
-    return SBUF;                    // return character from SBUF
+    RI = 0;              // clear RI flag
+    return SBUF;         // return character from SBUF
 }
 
 int putstr (char *s)
